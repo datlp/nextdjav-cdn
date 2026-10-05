@@ -1341,8 +1341,13 @@ def get_media():
                 db_dir = os.path.dirname(os.path.abspath(app_args.sqlite3)) if app_args and app_args.sqlite3 else '.'
                 source_name = getattr(scraper_instance, 'source_name', app_args.source if app_args else 'missav').lower()
                 
-                # Tìm file bin tương ứng (ví dụ: missav_covers_0001.bin, javtiful_covers_0001.bin, v.v.)
+                vault_dir = os.environ.get("VAULT_ROOT") or (r"D:\Dat\Vault" if os.name == 'nt' else "/sdcard/Vault")
+                
+                # Tìm file bin tương ứng (ưu tiên trong Vault trước, sau đó fallback về db_dir)
                 bin_patterns = [
+                    os.path.join(vault_dir, f"{source_name}_covers_{bin_id:04d}.bin"),
+                    os.path.join(vault_dir, f"{source_name}_posters_{bin_id:04d}.bin"),
+                    os.path.join(vault_dir, source_name, f"{source_name}_covers_{bin_id:04d}.bin"),
                     os.path.join(db_dir, f"{source_name}_covers_{bin_id:04d}.bin"),
                     os.path.join(db_dir, f"{source_name}_posters_{bin_id:04d}.bin"),
                     os.path.join(db_dir, f"{source_name}_covers_{bin_id}.bin"),
