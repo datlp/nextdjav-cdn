@@ -25,11 +25,11 @@ TẤT CẢ các Git commit message PHẢI ĐƯỢC VIẾT HOÀN TOÀN BẰNG **T
 
 ### 🌐 Cổng tiêu chuẩn hệ thống (Standard Ecosystem Ports):
 - `3010`: `nextdjav-admin` (Admin server / Watchdog & Crawler)
-- `3011`: `nextdjav` (Dedicated GDrive OnePlayer)
-- `3012`: `crawl-vod` - Javtiful (`javtiful.com`)
-- `3013`: `crawl-vod` - MissAV (`missav.ws`)
-- `3014`: `crawl-vod` - VLXX (`vlxx.phd`)
-- `3015`: `crawl-vod` - Sextop1 (`sextop1.spa`)
+- `3011`: `nextdjav-gdrive` (Dedicated GDrive OnePlayer)
+- `3012`: `nextdjav-cdn` - Javtiful (`javtiful.com`)
+- `3013`: `nextdjav-cdn` - MissAV (`missav.ws`)
+- `3014`: `nextdjav-cdn` - VLXX (`vlxx.phd`)
+- `3015`: `nextdjav-cdn` - Sextop1 (`sextop1.spa`)
 
 ---
 
