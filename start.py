@@ -72,14 +72,13 @@ def resolve_db_path(source: str):
 
 def main():
     env_mode = os.environ.get("APP_ENV", "prod").lower()
-    port_offset = 2000 if env_mode == "dev" else 0
 
     nextdjav_db = os.environ.get("WINDOWS_NEXTDJAV_DB") if sys.platform == "win32" else os.environ.get("TERMUX_NEXTDJAV_DB")
     
     print(f"==================================================")
     print(f" 🚀 KHỞI CHẠY HỆ THỐNG VOD CDN (NEXTDJAV-CDN)")
     print(f"==================================================")
-    print(f" Môi trường: {env_mode.upper()} | Port Offset: +{port_offset}")
+    print(f" Môi trường: {env_mode.upper()}")
 
     processes = []
     log_dir = os.path.join(BASE_DIR, "logs")
@@ -91,7 +90,7 @@ def main():
             print(f"  [!] Bỏ qua {src.upper()}: Không tìm thấy file Database.")
             continue
             
-        port = cfg["port"] + port_offset
+        port = cfg["port"]
         kill_port(port)
 
         cmd = [
