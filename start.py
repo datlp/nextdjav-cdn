@@ -29,11 +29,11 @@ def load_simple_env(env_path):
 load_simple_env(os.path.join(BASE_DIR, ".env"))
 
 VOD_SOURCES = {
-    "javtiful": {"port": 5012},
-    "missav":   {"port": 5013},
-    "vlxx":     {"port": 5014},
-    "sextop1":  {"port": 5015},
-    "javguru":  {"port": 5016},
+    "javtiful": {"port": int(os.environ.get("PORT_JAVTIFUL", "5012"))},
+    "missav":   {"port": int(os.environ.get("PORT_MISSAV", "5013"))},
+    "vlxx":     {"port": int(os.environ.get("PORT_VLXX", "5014"))},
+    "sextop1":  {"port": int(os.environ.get("PORT_SEXTOP1", "5015"))},
+    "javguru":  {"port": int(os.environ.get("PORT_JAVGURU", "5016"))},
 }
 
 def kill_port(port: int):
