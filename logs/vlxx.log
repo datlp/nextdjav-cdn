@@ -1,0 +1,409 @@
+[261008-154959.541] [Port:7014] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-155000.442] [Port:7014] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-155000.444] [Port:7014] [System] ✔️RAM chiếm dụng: 138.38M | NLTK: 0.00M | CPU: 0.0%
+[261008-155000.452] [Port:7014] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-155000.477] [Port:7014] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-155000.477] [Port:7014] [System] ℹ️ Lấy domain từ database: vlxx.phd
+[261008-155000.478] [Port:7014] [VLXX] Đã load session từ database.
+[261008-155000.478] [Port:7014] [VLXX] Warming up session... ⏳
+[261008-155000.478] [Port:7014] [VLXX] Khởi tạo sync_tasks cho VLXX...
+[261008-155000.478] [Port:7014] [System] ✔️ Vlxx Player worker started at http://localhost:7014
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-155000.875] [Port:7014] [VLXX] Session is warm. ✔️
+[261008-155005.445] [Port:7014] [System] ✔️RAM chiếm dụng: 151.11M | NLTK: 0.00M | CPU: 14.9%
+[261008-155010.446] [Port:7014] [System] ✔️RAM chiếm dụng: 151.11M | NLTK: 0.00M | CPU: 17.6%
+[261008-155244.852] [Port:7014] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-155245.821] [Port:7014] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-155245.823] [Port:7014] [System] ✔️RAM chiếm dụng: 138.50M | NLTK: 0.00M | CPU: 0.0%
+[261008-155245.829] [Port:7014] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-155245.846] [Port:7014] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-155245.846] [Port:7014] [System] ℹ️ Lấy domain từ database: vlxx.phd
+[261008-155245.847] [Port:7014] [VLXX] Đã load session từ database.
+[261008-155245.847] [Port:7014] [VLXX] Warming up session... ⏳
+[261008-155245.847] [Port:7014] [VLXX] Khởi tạo sync_tasks cho VLXX...
+[261008-155245.848] [Port:7014] [System] ✔️ Vlxx Player worker started at http://localhost:7014
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-155246.771] [Port:7014] [VLXX] Session is warm. ✔️
+[261008-155252.774] [Port:7014] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-155253.628] [Port:7014] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-155253.632] [Port:7014] [System] ✔️RAM chiếm dụng: 138.56M | NLTK: 0.00M | CPU: 0.0%
+[261008-155253.640] [Port:7014] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-155253.660] [Port:7014] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-155253.660] [Port:7014] [System] ℹ️ Lấy domain từ database: vlxx.phd
+[261008-155253.661] [Port:7014] [VLXX] Đã load session từ database.
+[261008-155253.661] [Port:7014] [VLXX] Warming up session... ⏳
+[261008-155253.662] [Port:7014] [VLXX] Khởi tạo sync_tasks cho VLXX...
+[261008-155253.662] [Port:7014] [System] ✔️ Vlxx Player worker started at http://localhost:7014
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-155254.106] [Port:7014] [VLXX] Session is warm. ✔️
+[261008-155258.632] [Port:7014] [System] ✔️RAM chiếm dụng: 151.10M | NLTK: 0.00M | CPU: 7.6%
+[261008-155303.633] [Port:7014] [System] ✔️RAM chiếm dụng: 151.10M | NLTK: 0.00M | CPU: 4.8%
+[261008-155308.634] [Port:7014] [System] ✔️RAM chiếm dụng: 151.10M | NLTK: 0.00M | CPU: 3.4%
+[261008-155313.635] [Port:7014] [System] ✔️RAM chiếm dụng: 151.10M | NLTK: 0.00M | CPU: 7.9%
+[261008-155318.636] [Port:7014] [System] ✔️RAM chiếm dụng: 151.10M | NLTK: 0.00M | CPU: 10.2%
+[261008-155323.636] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 6.4%
+[261008-155328.638] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 10.8%
+[261008-155333.638] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 12.7%
+[261008-155338.639] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 7.3%
+[261008-155343.639] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 5.7%
+[261008-155348.640] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 14.5%
+[261008-155353.641] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 16.6%
+[261008-155358.641] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 4.3%
+[261008-155403.642] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 4.0%
+[261008-155408.643] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 13.6%
+[261008-155413.644] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 5.9%
+[261008-155418.644] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 10.5%
+[261008-155423.645] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 7.4%
+[261008-155428.646] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 5.7%
+[261008-155433.647] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 8.8%
+[261008-155438.647] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 4.3%
+[261008-155443.648] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 9.2%
+[261008-155448.648] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 4.8%
+[261008-155453.649] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 7.7%
+[261008-155458.650] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 4.7%
+[261008-155503.651] [Port:7014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 1.9%
+[261008-155508.651] [Port:7014] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 14.9%
+[261008-155513.652] [Port:7014] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 10.1%
+[261008-155518.653] [Port:7014] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 20.2%
+[261008-155523.665] [Port:7014] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 25.1%
+[261008-155528.665] [Port:7014] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 18.6%
+[261008-155533.666] [Port:7014] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 6.4%
+[261008-155538.667] [Port:7014] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 8.4%
+[261008-155543.667] [Port:7014] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 3.2%
+[261008-155548.668] [Port:7014] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 8.3%
+[261008-155553.669] [Port:7014] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 8.8%
+[261008-155554.107] [Port:7014] [VLXX] Warming up session... ⏳
+[261008-155554.550] [Port:7014] [VLXX] Session is warm. ✔️
+[261008-155558.669] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 3.7%
+[261008-155603.670] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 10.8%
+[261008-155608.671] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 4.8%
+[261008-155613.672] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 3.4%
+[261008-155618.673] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 10.3%
+[261008-155623.673] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 6.2%
+[261008-155628.675] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 4.0%
+[261008-155633.675] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 8.1%
+[261008-155638.676] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 4.0%
+[261008-155643.676] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 6.5%
+[261008-155648.677] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 5.2%
+[261008-155653.678] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 11.1%
+[261008-155658.679] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 3.6%
+[261008-155703.679] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 4.8%
+[261008-155708.680] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 5.9%
+[261008-155713.681] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 6.9%
+[261008-155718.681] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 4.3%
+[261008-155723.682] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 10.9%
+[261008-155728.683] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 12.6%
+[261008-155733.685] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 15.9%
+[261008-155738.685] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 11.3%
+[261008-155743.686] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 10.9%
+[261008-155748.687] [Port:7014] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 8.7%
+[261008-155753.688] [Port:7014] [System] ✔️RAM chiếm dụng: 151.16M | NLTK: 0.00M | CPU: 3.6%
+[261008-155758.689] [Port:7014] [System] ✔️RAM chiếm dụng: 151.16M | NLTK: 0.00M | CPU: 6.4%
+[261008-155803.689] [Port:7014] [System] ✔️RAM chiếm dụng: 151.16M | NLTK: 0.00M | CPU: 8.1%
+[261008-155808.690] [Port:7014] [System] ✔️RAM chiếm dụng: 151.16M | NLTK: 0.00M | CPU: 4.2%
+[261008-155813.691] [Port:7014] [System] ✔️RAM chiếm dụng: 151.16M | NLTK: 0.00M | CPU: 8.8%
+[261008-155818.692] [Port:7014] [System] ✔️RAM chiếm dụng: 151.16M | NLTK: 0.00M | CPU: 22.1%
+[261008-155823.693] [Port:7014] [System] ✔️RAM chiếm dụng: 151.16M | NLTK: 0.00M | CPU: 7.9%
+[261008-155828.694] [Port:7014] [System] ✔️RAM chiếm dụng: 151.16M | NLTK: 0.00M | CPU: 12.8%
+[261008-155833.695] [Port:7014] [System] ✔️RAM chiếm dụng: 151.16M | NLTK: 0.00M | CPU: 9.1%
+[261008-155838.695] [Port:7014] [System] ✔️RAM chiếm dụng: 151.16M | NLTK: 0.00M | CPU: 6.1%
+[261008-155843.697] [Port:7014] [System] ✔️RAM chiếm dụng: 151.16M | NLTK: 0.00M | CPU: 4.2%
+[261008-155848.698] [Port:7014] [System] ✔️RAM chiếm dụng: 151.16M | NLTK: 0.00M | CPU: 4.1%
+[261008-155853.698] [Port:7014] [System] ✔️RAM chiếm dụng: 151.16M | NLTK: 0.00M | CPU: 11.0%
+[261008-155854.552] [Port:7014] [VLXX] Warming up session... ⏳
+[261008-155854.966] [Port:7014] [VLXX] Session is warm. ✔️
+[261008-155858.699] [Port:7014] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 9.7%
+[261008-155903.700] [Port:7014] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 22.3%
+[261008-160156.524] [Port:5014] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-160157.367] [Port:5014] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-160157.368] [Port:5014] [System] ✔️RAM chiếm dụng: 138.80M | NLTK: 0.00M | CPU: 0.0%
+[261008-160157.376] [Port:5014] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-160157.400] [Port:5014] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-160157.400] [Port:5014] [System] ℹ️ Lấy domain từ database: vlxx.phd
+[261008-160157.401] [Port:5014] [VLXX] Đã load session từ database.
+[261008-160157.401] [Port:5014] [VLXX] Warming up session... ⏳
+[261008-160157.401] [Port:5014] [VLXX] Khởi tạo sync_tasks cho VLXX...
+[261008-160157.401] [Port:5014] [System] ✔️ Vlxx Player worker started at http://localhost:5014
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-160157.936] [Port:5014] [VLXX] Session is warm. ✔️
+[261008-160202.369] [Port:5014] [System] ✔️RAM chiếm dụng: 151.31M | NLTK: 0.00M | CPU: 8.2%
+[261008-165100.450] [Port:5014] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-165101.353] [Port:5014] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-165101.354] [Port:5014] [System] ✔️RAM chiếm dụng: 138.30M | NLTK: 0.00M | CPU: 0.0%
+[261008-165101.363] [Port:5014] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-165101.382] [Port:5014] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-165101.382] [Port:5014] [System] ℹ️ Lấy domain từ database: vlxx.phd
+[261008-165101.383] [Port:5014] [VLXX] Đã load session từ database.
+[261008-165101.383] [Port:5014] [VLXX] Warming up session... ⏳
+[261008-165101.383] [Port:5014] [VLXX] Khởi tạo sync_tasks cho VLXX...
+[261008-165101.384] [Port:5014] [System] ✔️ Vlxx Player worker started at http://localhost:5014
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-165101.784] [Port:5014] [VLXX] Session is warm. ✔️
+[261008-165106.355] [Port:5014] [System] ✔️RAM chiếm dụng: 150.92M | NLTK: 0.00M | CPU: 7.1%
+[261008-165111.356] [Port:5014] [System] ✔️RAM chiếm dụng: 150.92M | NLTK: 0.00M | CPU: 5.8%
+[261008-165116.356] [Port:5014] [System] ✔️RAM chiếm dụng: 150.92M | NLTK: 0.00M | CPU: 6.5%
+[261008-165121.357] [Port:5014] [System] ✔️RAM chiếm dụng: 150.92M | NLTK: 0.00M | CPU: 6.2%
+[261008-165126.358] [Port:5014] [System] ✔️RAM chiếm dụng: 150.92M | NLTK: 0.00M | CPU: 9.0%
+[261008-165131.359] [Port:5014] [System] ✔️RAM chiếm dụng: 150.95M | NLTK: 0.00M | CPU: 3.2%
+[261008-165136.360] [Port:5014] [System] ✔️RAM chiếm dụng: 150.95M | NLTK: 0.00M | CPU: 7.6%
+[261008-165141.360] [Port:5014] [System] ✔️RAM chiếm dụng: 150.95M | NLTK: 0.00M | CPU: 22.0%
+[261008-165146.362] [Port:5014] [System] ✔️RAM chiếm dụng: 150.95M | NLTK: 0.00M | CPU: 11.1%
+[261008-165151.363] [Port:5014] [System] ✔️RAM chiếm dụng: 150.95M | NLTK: 0.00M | CPU: 13.7%
+[261008-165156.363] [Port:5014] [System] ✔️RAM chiếm dụng: 150.95M | NLTK: 0.00M | CPU: 13.1%
+[261008-165201.364] [Port:5014] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 11.2%
+[261008-165206.364] [Port:5014] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 27.1%
+[261008-165211.365] [Port:5014] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 11.5%
+[261008-165216.365] [Port:5014] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 8.5%
+[261008-165221.366] [Port:5014] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 11.0%
+[261008-165226.367] [Port:5014] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 18.3%
+[261008-165231.368] [Port:5014] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 4.3%
+[261008-165237.722] [Port:5014] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-165238.638] [Port:5014] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-165238.640] [Port:5014] [System] ✔️RAM chiếm dụng: 138.26M | NLTK: 0.00M | CPU: 0.0%
+[261008-165238.648] [Port:5014] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-165238.671] [Port:5014] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-165238.672] [Port:5014] [System] ℹ️ Lấy domain từ database: vlxx.phd
+[261008-165238.673] [Port:5014] [VLXX] Đã load session từ database.
+[261008-165238.673] [Port:5014] [VLXX] Warming up session... ⏳
+[261008-165238.674] [Port:5014] [VLXX] Khởi tạo sync_tasks cho VLXX...
+[261008-165238.674] [Port:5014] [System] ✔️ Vlxx Player worker started at http://localhost:5014
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-165240.162] [Port:5014] [VLXX] Session is warm. ✔️
+[261008-165243.641] [Port:5014] [System] ✔️RAM chiếm dụng: 151.04M | NLTK: 0.00M | CPU: 12.1%
+[261008-165248.641] [Port:5014] [System] ✔️RAM chiếm dụng: 151.04M | NLTK: 0.00M | CPU: 3.5%
+[261008-165253.642] [Port:5014] [System] ✔️RAM chiếm dụng: 151.04M | NLTK: 0.00M | CPU: 6.5%
+[261008-165258.643] [Port:5014] [System] ✔️RAM chiếm dụng: 151.04M | NLTK: 0.00M | CPU: 3.6%
+[261008-165303.644] [Port:5014] [System] ✔️RAM chiếm dụng: 151.04M | NLTK: 0.00M | CPU: 3.5%
+[261008-165308.645] [Port:5014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 7.1%
+[261008-165313.646] [Port:5014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 5.7%
+[261008-165318.647] [Port:5014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 4.8%
+[261008-165323.647] [Port:5014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 3.4%
+[261008-165328.648] [Port:5014] [System] ✔️RAM chiếm dụng: 151.07M | NLTK: 0.00M | CPU: 5.4%
+[261008-165331.677] [Port:5014] [System] ⚠️ Nhận tín hiệu dừng (Ctrl+C), đang lưu dữ liệu an toàn...
+[261008-165331.681] [Port:5014] [System] ✔️ Đã thoát an toàn.
+[261008-165801.201] [Port:5014] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-165802.195] [Port:5014] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-165802.197] [Port:5014] [System] ✔️RAM chiếm dụng: 138.48M | NLTK: 0.00M | CPU: 0.0%
+[261008-165802.204] [Port:5014] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-165802.222] [Port:5014] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-165802.222] [Port:5014] [System] ℹ️ Lấy domain từ database: vlxx.phd
+[261008-165802.223] [Port:5014] [VLXX] Đã load session từ database.
+[261008-165802.223] [Port:5014] [VLXX] Warming up session... ⏳
+[261008-165802.223] [Port:5014] [VLXX] Khởi tạo sync_tasks cho VLXX...
+[261008-165802.224] [Port:5014] [System] ✔️ Vlxx Player worker started at http://localhost:5014
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-165802.651] [Port:5014] [VLXX] Session is warm. ✔️
+[261008-165807.197] [Port:5014] [System] ✔️RAM chiếm dụng: 151.61M | NLTK: 0.00M | CPU: 20.4%
+[261008-165808.916] [Port:5014] [API] 127.0.0.1 GET 200 /
+[261008-165809.104] [Port:5014] [API] 127.0.0.1 GET 200 /static/oneplayer/style.css?v=17
+[261008-165809.132] [Port:5014] [API] 127.0.0.1 GET 200 /static/oneplayer/config.js?v=17
+[261008-165809.133] [Port:5014] [API] 127.0.0.1 GET 200 /static/oneplayer/player.js?v=17
+[261008-165809.339] [Port:5014] [API] 127.0.0.1 GET 200 /static/oneplayer/explorer.js?v=17
+[261008-165809.340] [Port:5014] [API] 127.0.0.1 GET 200 /static/oneplayer/app.js?v=17
+[261008-165809.344] [Port:5014] [API] 127.0.0.1 GET 200 /manifest.json
+[261008-165809.385] [Port:5014] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-165809.387] [Port:5014] [API] 127.0.0.1 GET 200 /api/videos?sort_by=release_date&sort_asc=false&limit=12&offset=0&page=1&filter_has_cover=true
+[261008-165809.390] [Port:5014] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-165809.390] [Port:5014] [API] 127.0.0.1 GET 200 /api/categories/stats
+[261008-165809.397] [Port:5014] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-165809.400] [Port:5014] [API] 127.0.0.1 GET 200 /api/videos?sort_by=release_date&sort_asc=false&limit=12&offset=0&page=1&filter_has_cover=true
+[261008-165809.539] [Port:5014] [API] 127.0.0.1 GET 200 /static/favicon_vlxx.ico
+[261008-165809.540] [Port:5014] [API] 127.0.0.1 GET 200 /apple-icon.png
+[261008-165812.199] [Port:5014] [System] ✔️RAM chiếm dụng: 152.25M | NLTK: 0.00M | CPU: 69.0%
+[261008-165816.244] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=thu-thai-cho-me-vo-trong-chuyen-du-lich-gia-dinh/3226
+[261008-165816.245] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=dit-me-thang-ban-than/3225
+[261008-165816.249] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=vo-dam-len-cho-ca-van-phong-dit-sau-lung-chong/3224
+[261008-165816.253] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=vua-dit-vua-nghe-dien-thoai-cua-chong/2874
+[261008-165816.259] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=bu-cu-sep/2862
+[261008-165816.262] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=de-em-giup-thay-nhanh-het-benh/3223
+[261008-165816.266] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=bi-tu-choi-tinh-cam-thanh-nien-du-luon-ca-2-me-con-crush/3221
+[261008-165816.267] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=co-em-ke-mong-to-cua-toi/2861
+[261008-165816.271] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=anh-nhan-vien-may-man-duoc-sep-nu-bu-cac-trong-gio-nghi-trua/3192
+[261008-165816.274] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=khong-the-cuong-lai-con-cac-to-bu-cua-anh-trai/2860
+[261008-165817.200] [Port:5014] [System] ✔️RAM chiếm dụng: 152.44M | NLTK: 0.00M | CPU: 19.0%
+[261008-165822.201] [Port:5014] [System] ✔️RAM chiếm dụng: 152.44M | NLTK: 0.00M | CPU: 10.4%
+[261008-165827.202] [Port:5014] [System] ✔️RAM chiếm dụng: 152.44M | NLTK: 0.00M | CPU: 11.4%
+[261008-165832.202] [Port:5014] [System] ✔️RAM chiếm dụng: 152.48M | NLTK: 0.00M | CPU: 11.6%
+[261008-165837.203] [Port:5014] [System] ✔️RAM chiếm dụng: 152.48M | NLTK: 0.00M | CPU: 7.0%
+[261008-165842.203] [Port:5014] [System] ✔️RAM chiếm dụng: 152.48M | NLTK: 0.00M | CPU: 4.9%
+[261008-165847.203] [Port:5014] [System] ✔️RAM chiếm dụng: 152.48M | NLTK: 0.00M | CPU: 9.5%
+[261008-165852.204] [Port:5014] [System] ✔️RAM chiếm dụng: 152.48M | NLTK: 0.00M | CPU: 12.6%
+[261008-165856.506] [Port:5014] [API] 192.168.102.100 GET 200 /
+[261008-165856.537] [Port:5014] [API] 192.168.102.100 GET 200 /static/oneplayer/style.css?v=17
+[261008-165856.539] [Port:5014] [API] 192.168.102.100 GET 200 /static/oneplayer/config.js?v=17
+[261008-165856.540] [Port:5014] [API] 192.168.102.100 GET 200 /static/oneplayer/player.js?v=17
+[261008-165856.541] [Port:5014] [API] 192.168.102.100 GET 200 /static/oneplayer/explorer.js?v=17
+[261008-165856.542] [Port:5014] [API] 192.168.102.100 GET 200 /static/oneplayer/app.js?v=17
+[261008-165856.714] [Port:5014] [API] 192.168.102.100 GET 200 /manifest.json
+[261008-165856.726] [Port:5014] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-165856.726] [Port:5014] [API] 192.168.102.100 GET 200 /api/videos?sort_by=release_date&sort_asc=false&limit=12&offset=0&page=1&filter_has_cover=true
+[261008-165856.727] [Port:5014] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-165856.727] [Port:5014] [API] 192.168.102.100 GET 200 /api/categories/stats
+[261008-165856.732] [Port:5014] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-165856.732] [Port:5014] [API] 192.168.102.100 GET 200 /api/videos?sort_by=release_date&sort_asc=false&limit=12&offset=0&page=1&filter_has_cover=true
+[261008-165856.790] [Port:5014] [API] 192.168.102.100 GET 200 /api/media?id=thu-thai-cho-me-vo-trong-chuyen-du-lich-gia-dinh/3226
+[261008-165856.791] [Port:5014] [API] 192.168.102.100 GET 200 /api/media?id=dit-me-thang-ban-than/3225
+[261008-165856.799] [Port:5014] [API] 192.168.102.100 GET 200 /api/media?id=vo-dam-len-cho-ca-van-phong-dit-sau-lung-chong/3224
+[261008-165856.801] [Port:5014] [API] 192.168.102.100 GET 200 /api/media?id=vua-dit-vua-nghe-dien-thoai-cua-chong/2874
+[261008-165856.805] [Port:5014] [API] 192.168.102.100 GET 200 /api/media?id=bu-cu-sep/2862
+[261008-165856.808] [Port:5014] [API] 192.168.102.100 GET 200 /api/media?id=de-em-giup-thay-nhanh-het-benh/3223
+[261008-165856.811] [Port:5014] [API] 192.168.102.100 GET 200 /api/media?id=bi-tu-choi-tinh-cam-thanh-nien-du-luon-ca-2-me-con-crush/3221
+[261008-165856.815] [Port:5014] [API] 192.168.102.100 GET 200 /api/media?id=anh-nhan-vien-may-man-duoc-sep-nu-bu-cac-trong-gio-nghi-trua/3192
+[261008-165856.818] [Port:5014] [API] 192.168.102.100 GET 200 /api/media?id=co-em-ke-mong-to-cua-toi/2861
+[261008-165856.821] [Port:5014] [API] 192.168.102.100 GET 200 /api/media?id=khong-the-cuong-lai-con-cac-to-bu-cua-anh-trai/2860
+[261008-165857.205] [Port:5014] [System] ✔️RAM chiếm dụng: 152.57M | NLTK: 0.00M | CPU: 20.9%
+[261008-165902.206] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 15.0%
+[261008-165907.206] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 3.6%
+[261008-165912.207] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 6.7%
+[261008-165917.208] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 4.3%
+[261008-165922.209] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 5.6%
+[261008-165927.209] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 9.5%
+[261008-165932.210] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 2.9%
+[261008-165937.211] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 1.5%
+[261008-165942.212] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 5.4%
+[261008-165947.213] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 2.9%
+[261008-165952.213] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 6.7%
+[261008-165957.214] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 11.7%
+[261008-170002.215] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 10.4%
+[261008-170007.216] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 11.9%
+[261008-170012.216] [Port:5014] [System] ✔️RAM chiếm dụng: 152.52M | NLTK: 0.00M | CPU: 12.7%
+[261008-170017.217] [Port:5014] [System] ✔️RAM chiếm dụng: 152.49M | NLTK: 0.00M | CPU: 12.3%
+[261008-170022.218] [Port:5014] [System] ✔️RAM chiếm dụng: 152.49M | NLTK: 0.00M | CPU: 3.7%
+[261008-170027.219] [Port:5014] [System] ✔️RAM chiếm dụng: 152.49M | NLTK: 0.00M | CPU: 8.7%
+[261008-170027.980] [Port:5014] [System] ⚠️ Nhận tín hiệu dừng (Ctrl+C), đang lưu dữ liệu an toàn...
+[261008-170027.984] [Port:5014] [System] ✔️ Đã thoát an toàn.
+[261008-224005.306] [Port:5014] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-224007.025] [Port:5014] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-224007.027] [Port:5014] [System] ✔️RAM chiếm dụng: 138.74M | NLTK: 0.00M | CPU: 0.0%
+[261008-224007.068] [Port:5014] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-224007.093] [Port:5014] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-224007.094] [Port:5014] [System] ℹ️ Lấy domain từ database: vlxx.phd
+[261008-224007.094] [Port:5014] [VLXX] Đã load session từ database.
+[261008-224007.094] [Port:5014] [VLXX] Warming up session... ⏳
+[261008-224007.095] [Port:5014] [VLXX] Khởi tạo sync_tasks cho VLXX...
+[261008-224007.095] [Port:5014] [System] ✔️ Vlxx Player worker started at http://localhost:5014
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-224008.038] [Port:5014] [VLXX] Session is warm. ✔️
+[261008-224012.027] [Port:5014] [System] ✔️RAM chiếm dụng: 151.46M | NLTK: 0.00M | CPU: 7.5%
+[261008-224017.028] [Port:5014] [System] ✔️RAM chiếm dụng: 151.46M | NLTK: 0.00M | CPU: 4.8%
+[261008-225250.170] [Port:5014] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-225251.022] [Port:5014] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-225251.023] [Port:5014] [System] ✔️RAM chiếm dụng: 138.21M | NLTK: 0.00M | CPU: 0.0%
+[261008-225251.031] [Port:5014] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-225251.052] [Port:5014] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-225251.052] [Port:5014] [System] ℹ️ Lấy domain từ database: vlxx.phd
+[261008-225251.054] [Port:5014] [VLXX] Đã load session từ database.
+[261008-225251.054] [Port:5014] [VLXX] Warming up session... ⏳
+[261008-225251.054] [Port:5014] [VLXX] Khởi tạo sync_tasks cho VLXX...
+[261008-225251.054] [Port:5014] [System] ✔️ Vlxx Player worker started at http://localhost:5014
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-225251.492] [Port:5014] [VLXX] Session is warm. ✔️
+[261008-225256.024] [Port:5014] [System] ✔️RAM chiếm dụng: 150.95M | NLTK: 0.00M | CPU: 6.0%
+[261008-225301.025] [Port:5014] [System] ✔️RAM chiếm dụng: 150.95M | NLTK: 0.00M | CPU: 25.6%
+[261008-225301.745] [Port:5014] [API] 127.0.0.1 GET 200 /
+[261008-225301.812] [Port:5014] [API] 127.0.0.1 GET 200 /static/oneplayer/style.css?v=17
+[261008-225301.814] [Port:5014] [API] 127.0.0.1 GET 200 /static/oneplayer/player.js?v=17
+[261008-225301.858] [Port:5014] [API] 127.0.0.1 GET 200 /static/oneplayer/config.js?v=17
+[261008-225301.945] [Port:5014] [API] 127.0.0.1 GET 200 /static/oneplayer/explorer.js?v=17
+[261008-225301.948] [Port:5014] [API] 127.0.0.1 GET 200 /static/oneplayer/app.js?v=17
+[261008-225301.948] [Port:5014] [API] 127.0.0.1 GET 200 /manifest.json
+[261008-225301.974] [Port:5014] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-225301.975] [Port:5014] [API] 127.0.0.1 GET 200 /api/videos?sort_by=release_date&sort_asc=false&limit=12&offset=0&page=1&filter_has_cover=true
+[261008-225301.976] [Port:5014] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-225301.976] [Port:5014] [API] 127.0.0.1 GET 200 /api/categories/stats
+[261008-225301.983] [Port:5014] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-225301.984] [Port:5014] [API] 127.0.0.1 GET 200 /api/videos?sort_by=release_date&sort_asc=false&limit=12&offset=0&page=1&filter_has_cover=true
+[261008-225302.070] [Port:5014] [API] 127.0.0.1 GET 200 /apple-icon.png
+[261008-225306.026] [Port:5014] [System] ✔️RAM chiếm dụng: 151.63M | NLTK: 0.00M | CPU: 37.0%
+[261008-225311.028] [Port:5014] [System] ✔️RAM chiếm dụng: 151.63M | NLTK: 0.00M | CPU: 17.4%
+[261008-225311.385] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=thu-thai-cho-me-vo-trong-chuyen-du-lich-gia-dinh/3226
+[261008-225311.385] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=dit-me-thang-ban-than/3225
+[261008-225311.389] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=vo-dam-len-cho-ca-van-phong-dit-sau-lung-chong/3224
+[261008-225311.391] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=vua-dit-vua-nghe-dien-thoai-cua-chong/2874
+[261008-225311.393] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=bu-cu-sep/2862
+[261008-225311.397] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=de-em-giup-thay-nhanh-het-benh/3223
+[261008-225311.399] [Port:5014] [API] 127.0.0.1 GET 200 /api/media?id=co-em-ke-mong-to-cua-toi/2861
+[261008-225316.029] [Port:5014] [System] ✔️RAM chiếm dụng: 151.84M | NLTK: 0.00M | CPU: 14.8%
+[261008-225321.030] [Port:5014] [System] ✔️RAM chiếm dụng: 151.88M | NLTK: 0.00M | CPU: 17.7%
+[261008-225326.030] [Port:5014] [System] ✔️RAM chiếm dụng: 151.88M | NLTK: 0.00M | CPU: 6.8%
+[261008-225331.031] [Port:5014] [System] ✔️RAM chiếm dụng: 151.88M | NLTK: 0.00M | CPU: 13.5%
+[261008-225336.032] [Port:5014] [System] ✔️RAM chiếm dụng: 151.88M | NLTK: 0.00M | CPU: 8.5%
+[261008-225341.032] [Port:5014] [System] ✔️RAM chiếm dụng: 151.88M | NLTK: 0.00M | CPU: 8.4%
+[261008-225346.033] [Port:5014] [System] ✔️RAM chiếm dụng: 151.88M | NLTK: 0.00M | CPU: 5.5%
+[261008-225351.035] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 6.7%
+[261008-225356.035] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 9.0%
+[261008-225401.036] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 9.1%
+[261008-225406.037] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 8.2%
+[261008-225411.037] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 8.0%
+[261008-225416.038] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 6.9%
+[261008-225421.039] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 5.3%
+[261008-225426.039] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 25.8%
+[261008-225431.040] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 12.8%
+[261008-225436.040] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 3.5%
+[261008-225441.041] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 1.6%
+[261008-225446.041] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 9.0%
+[261008-225451.041] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 11.4%
+[261008-225456.042] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 13.6%
+[261008-225501.043] [Port:5014] [System] ✔️RAM chiếm dụng: 151.83M | NLTK: 0.00M | CPU: 15.1%
+[261008-225506.043] [Port:5014] [System] ✔️RAM chiếm dụng: 151.80M | NLTK: 0.00M | CPU: 17.1%
+[261008-225511.044] [Port:5014] [System] ✔️RAM chiếm dụng: 151.80M | NLTK: 0.00M | CPU: 25.4%
+[261008-225516.044] [Port:5014] [System] ✔️RAM chiếm dụng: 151.80M | NLTK: 0.00M | CPU: 13.4%
+[261008-225521.044] [Port:5014] [System] ✔️RAM chiếm dụng: 151.80M | NLTK: 0.00M | CPU: 11.7%
+[261008-225526.045] [Port:5014] [System] ✔️RAM chiếm dụng: 151.80M | NLTK: 0.00M | CPU: 7.5%
+[261008-225531.046] [Port:5014] [System] ✔️RAM chiếm dụng: 151.80M | NLTK: 0.00M | CPU: 8.6%
+[261008-225536.046] [Port:5014] [System] ✔️RAM chiếm dụng: 151.80M | NLTK: 0.00M | CPU: 2.3%
+[261008-225541.047] [Port:5014] [System] ✔️RAM chiếm dụng: 151.80M | NLTK: 0.00M | CPU: 1.8%
+[261008-225546.047] [Port:5014] [System] ✔️RAM chiếm dụng: 151.80M | NLTK: 0.00M | CPU: 2.6%
+[261008-225551.047] [Port:5014] [System] ✔️RAM chiếm dụng: 151.80M | NLTK: 0.00M | CPU: 2.3%
+[261008-225551.493] [Port:5014] [VLXX] Warming up session... ⏳
+[261008-225551.868] [Port:5014] [VLXX] Session is warm. ✔️
+[261008-225556.048] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 3.0%
+[261008-225601.049] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 5.1%
+[261008-225606.050] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 4.6%
+[261008-225611.050] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 4.1%
+[261008-225616.051] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 4.4%
+[261008-225621.051] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 2.0%
+[261008-225626.051] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 5.1%
+[261008-225631.052] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 12.5%
+[261008-225636.052] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 3.9%
+[261008-225641.053] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 7.8%
+[261008-225646.053] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 6.9%
+[261008-225651.054] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 5.0%
+[261008-225656.055] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 7.2%
+[261008-225701.056] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 7.3%
+[261008-225706.057] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 2.3%
+[261008-225711.057] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 3.9%
+[261008-225716.057] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 5.8%
+[261008-225721.058] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 12.2%
+[261008-225726.058] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 18.0%
+[261008-225731.058] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 13.3%
+[261008-225736.059] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 6.9%
+[261008-225741.059] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 1.7%
+[261008-225746.060] [Port:5014] [System] ✔️RAM chiếm dụng: 151.82M | NLTK: 0.00M | CPU: 4.0%
+[261008-225746.183] [Port:5014] [System] ⚠️ Nhận tín hiệu dừng (Ctrl+C), đang lưu dữ liệu an toàn...
+[261008-225746.188] [Port:5014] [System] ✔️ Đã thoát an toàn.
+[261008-225758.035] [Port:5014] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-225758.926] [Port:5014] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-225758.928] [Port:5014] [System] ✔️RAM chiếm dụng: 138.33M | NLTK: 0.00M | CPU: 0.0%
+[261008-225758.935] [Port:5014] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-225758.956] [Port:5014] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-225758.956] [Port:5014] [System] ℹ️ Lấy domain từ database: vlxx.phd
+[261008-225758.957] [Port:5014] [VLXX] Đã load session từ database.
+[261008-225758.957] [Port:5014] [VLXX] Warming up session... ⏳
+[261008-225758.957] [Port:5014] [VLXX] Khởi tạo sync_tasks cho VLXX...
+[261008-225758.957] [Port:5014] [System] ✔️ Vlxx Player worker started at http://localhost:5014
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-225759.643] [Port:5014] [VLXX] Session is warm. ✔️
+[261008-225803.929] [Port:5014] [System] ✔️RAM chiếm dụng: 151.43M | NLTK: 0.00M | CPU: 4.2%
+[261008-225805.568] [Port:5014] [System] ⚠️ Nhận tín hiệu dừng (Ctrl+C), đang lưu dữ liệu an toàn...
+[261008-225805.571] [Port:5014] [System] ✔️ Đã thoát an toàn.

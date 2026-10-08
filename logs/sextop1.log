@@ -1,0 +1,411 @@
+[261008-154959.543] [Port:7015] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-155000.458] [Port:7015] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-155000.459] [Port:7015] [System] ✔️RAM chiếm dụng: 138.46M | NLTK: 0.00M | CPU: 0.0%
+[261008-155000.468] [Port:7015] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-155000.502] [Port:7015] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-155000.503] [Port:7015] [System] ℹ️ Lấy domain từ database: sextop1.gdn
+[261008-155000.504] [Port:7015] [Sextop1] Đã load session từ database.
+[261008-155000.504] [Port:7015] [Sextop1] Warming up session... ⏳
+[261008-155000.504] [Port:7015] [Sextop1] Khởi tạo sync_tasks cho Sextop1...
+[261008-155000.505] [Port:7015] [System] ✔️ Sextop1 Player worker started at http://localhost:7015
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-155001.463] [Port:7015] [Sextop1] Session is warm. ✔️
+[261008-155005.459] [Port:7015] [System] ✔️RAM chiếm dụng: 150.65M | NLTK: 0.00M | CPU: 14.9%
+[261008-155010.460] [Port:7015] [System] ✔️RAM chiếm dụng: 150.65M | NLTK: 0.00M | CPU: 17.6%
+[261008-155244.864] [Port:7015] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-155245.820] [Port:7015] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-155245.821] [Port:7015] [System] ✔️RAM chiếm dụng: 138.36M | NLTK: 0.00M | CPU: 0.0%
+[261008-155245.829] [Port:7015] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-155245.858] [Port:7015] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-155245.858] [Port:7015] [System] ℹ️ Lấy domain từ database: sextop1.gdn
+[261008-155245.859] [Port:7015] [Sextop1] Đã load session từ database.
+[261008-155245.859] [Port:7015] [Sextop1] Warming up session... ⏳
+[261008-155245.859] [Port:7015] [Sextop1] Khởi tạo sync_tasks cho Sextop1...
+[261008-155245.859] [Port:7015] [System] ✔️ Sextop1 Player worker started at http://localhost:7015
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-155246.727] [Port:7015] [Sextop1] Session is warm. ✔️
+[261008-155252.804] [Port:7015] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-155253.638] [Port:7015] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-155253.639] [Port:7015] [System] ✔️RAM chiếm dụng: 138.70M | NLTK: 0.00M | CPU: 0.0%
+[261008-155253.649] [Port:7015] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-155253.681] [Port:7015] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-155253.682] [Port:7015] [System] ℹ️ Lấy domain từ database: sextop1.gdn
+[261008-155253.682] [Port:7015] [Sextop1] Đã load session từ database.
+[261008-155253.682] [Port:7015] [Sextop1] Warming up session... ⏳
+[261008-155253.683] [Port:7015] [Sextop1] Khởi tạo sync_tasks cho Sextop1...
+[261008-155253.683] [Port:7015] [System] ✔️ Sextop1 Player worker started at http://localhost:7015
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-155254.558] [Port:7015] [Sextop1] Session is warm. ✔️
+[261008-155258.640] [Port:7015] [System] ✔️RAM chiếm dụng: 150.98M | NLTK: 0.00M | CPU: 7.6%
+[261008-155303.641] [Port:7015] [System] ✔️RAM chiếm dụng: 150.98M | NLTK: 0.00M | CPU: 4.8%
+[261008-155308.642] [Port:7015] [System] ✔️RAM chiếm dụng: 150.98M | NLTK: 0.00M | CPU: 3.4%
+[261008-155313.643] [Port:7015] [System] ✔️RAM chiếm dụng: 150.98M | NLTK: 0.00M | CPU: 7.9%
+[261008-155318.644] [Port:7015] [System] ✔️RAM chiếm dụng: 150.98M | NLTK: 0.00M | CPU: 10.4%
+[261008-155323.644] [Port:7015] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 6.3%
+[261008-155328.646] [Port:7015] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 10.8%
+[261008-155333.647] [Port:7015] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 12.7%
+[261008-155338.647] [Port:7015] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 7.3%
+[261008-155343.648] [Port:7015] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 5.7%
+[261008-155348.648] [Port:7015] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 14.6%
+[261008-155353.649] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 16.6%
+[261008-155358.649] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 4.3%
+[261008-155403.650] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 4.0%
+[261008-155408.650] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 13.6%
+[261008-155413.651] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 5.9%
+[261008-155418.651] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 10.6%
+[261008-155423.652] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 7.4%
+[261008-155428.653] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 5.7%
+[261008-155433.654] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 8.8%
+[261008-155438.654] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 4.3%
+[261008-155443.655] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 9.2%
+[261008-155448.656] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 4.8%
+[261008-155453.657] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 7.7%
+[261008-155458.657] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 4.8%
+[261008-155503.658] [Port:7015] [System] ✔️RAM chiếm dụng: 150.99M | NLTK: 0.00M | CPU: 2.0%
+[261008-155508.658] [Port:7015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 14.9%
+[261008-155513.659] [Port:7015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 10.1%
+[261008-155518.660] [Port:7015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 20.1%
+[261008-155523.665] [Port:7015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 25.1%
+[261008-155528.666] [Port:7015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 18.6%
+[261008-155533.666] [Port:7015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 6.4%
+[261008-155538.667] [Port:7015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 8.4%
+[261008-155543.667] [Port:7015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 3.2%
+[261008-155548.668] [Port:7015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 8.3%
+[261008-155553.669] [Port:7015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 8.8%
+[261008-155554.560] [Port:7015] [Sextop1] Warming up session... ⏳
+[261008-155555.564] [Port:7015] [Sextop1] Session is warm. ✔️
+[261008-155558.669] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 3.7%
+[261008-155603.670] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 10.8%
+[261008-155608.671] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 4.8%
+[261008-155613.672] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 3.4%
+[261008-155618.673] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 10.3%
+[261008-155623.673] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 6.2%
+[261008-155628.675] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 4.0%
+[261008-155633.675] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 8.1%
+[261008-155638.676] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 4.0%
+[261008-155643.676] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 6.5%
+[261008-155648.677] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 5.2%
+[261008-155653.678] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 11.1%
+[261008-155658.679] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 3.6%
+[261008-155703.679] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 4.8%
+[261008-155708.680] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 5.9%
+[261008-155713.681] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 6.9%
+[261008-155718.681] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 4.3%
+[261008-155723.682] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 10.9%
+[261008-155728.683] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 12.6%
+[261008-155733.685] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 15.9%
+[261008-155738.685] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 11.3%
+[261008-155743.686] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 10.9%
+[261008-155748.687] [Port:7015] [System] ✔️RAM chiếm dụng: 151.13M | NLTK: 0.00M | CPU: 8.7%
+[261008-155753.688] [Port:7015] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 3.6%
+[261008-155758.689] [Port:7015] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 6.4%
+[261008-155803.689] [Port:7015] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 8.1%
+[261008-155808.690] [Port:7015] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 4.2%
+[261008-155813.691] [Port:7015] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 8.8%
+[261008-155818.692] [Port:7015] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 22.1%
+[261008-155823.693] [Port:7015] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 7.9%
+[261008-155828.694] [Port:7015] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 12.8%
+[261008-155833.695] [Port:7015] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 9.1%
+[261008-155838.695] [Port:7015] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 6.1%
+[261008-155843.697] [Port:7015] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 4.2%
+[261008-155848.698] [Port:7015] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 4.1%
+[261008-155853.698] [Port:7015] [System] ✔️RAM chiếm dụng: 151.21M | NLTK: 0.00M | CPU: 11.0%
+[261008-155855.566] [Port:7015] [Sextop1] Warming up session... ⏳
+[261008-155856.466] [Port:7015] [Sextop1] Session is warm. ✔️
+[261008-155858.699] [Port:7015] [System] ✔️RAM chiếm dụng: 151.26M | NLTK: 0.00M | CPU: 9.7%
+[261008-155903.700] [Port:7015] [System] ✔️RAM chiếm dụng: 151.26M | NLTK: 0.00M | CPU: 22.3%
+[261008-160156.551] [Port:5015] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-160157.397] [Port:5015] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-160157.399] [Port:5015] [System] ✔️RAM chiếm dụng: 138.59M | NLTK: 0.00M | CPU: 0.0%
+[261008-160157.410] [Port:5015] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-160157.440] [Port:5015] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-160157.441] [Port:5015] [System] ℹ️ Lấy domain từ database: sextop1.gdn
+[261008-160157.441] [Port:5015] [Sextop1] Đã load session từ database.
+[261008-160157.442] [Port:5015] [Sextop1] Warming up session... ⏳
+[261008-160157.442] [Port:5015] [Sextop1] Khởi tạo sync_tasks cho Sextop1...
+[261008-160157.442] [Port:5015] [System] ✔️ Sextop1 Player worker started at http://localhost:5015
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-160158.311] [Port:5015] [Sextop1] Session is warm. ✔️
+[261008-160202.399] [Port:5015] [System] ✔️RAM chiếm dụng: 150.95M | NLTK: 0.00M | CPU: 8.0%
+[261008-165100.475] [Port:5015] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-165101.358] [Port:5015] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-165101.359] [Port:5015] [System] ✔️RAM chiếm dụng: 138.44M | NLTK: 0.00M | CPU: 0.0%
+[261008-165101.373] [Port:5015] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-165101.407] [Port:5015] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-165101.408] [Port:5015] [System] ℹ️ Lấy domain từ database: sextop1.gdn
+[261008-165101.408] [Port:5015] [Sextop1] Đã load session từ database.
+[261008-165101.408] [Port:5015] [Sextop1] Warming up session... ⏳
+[261008-165101.409] [Port:5015] [Sextop1] Khởi tạo sync_tasks cho Sextop1...
+[261008-165101.409] [Port:5015] [System] ✔️ Sextop1 Player worker started at http://localhost:5015
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-165102.356] [Port:5015] [Sextop1] Session is warm. ✔️
+[261008-165106.360] [Port:5015] [System] ✔️RAM chiếm dụng: 150.93M | NLTK: 0.00M | CPU: 7.0%
+[261008-165111.360] [Port:5015] [System] ✔️RAM chiếm dụng: 150.93M | NLTK: 0.00M | CPU: 5.8%
+[261008-165116.361] [Port:5015] [System] ✔️RAM chiếm dụng: 150.93M | NLTK: 0.00M | CPU: 6.5%
+[261008-165121.362] [Port:5015] [System] ✔️RAM chiếm dụng: 150.93M | NLTK: 0.00M | CPU: 6.2%
+[261008-165126.362] [Port:5015] [System] ✔️RAM chiếm dụng: 150.93M | NLTK: 0.00M | CPU: 9.0%
+[261008-165131.363] [Port:5015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 3.2%
+[261008-165136.364] [Port:5015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 7.6%
+[261008-165141.364] [Port:5015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 22.0%
+[261008-165146.364] [Port:5015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 11.1%
+[261008-165151.365] [Port:5015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 13.7%
+[261008-165156.366] [Port:5015] [System] ✔️RAM chiếm dụng: 150.96M | NLTK: 0.00M | CPU: 13.1%
+[261008-165201.367] [Port:5015] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 11.2%
+[261008-165206.367] [Port:5015] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 27.1%
+[261008-165211.367] [Port:5015] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 11.5%
+[261008-165216.368] [Port:5015] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 8.5%
+[261008-165221.369] [Port:5015] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 11.0%
+[261008-165226.370] [Port:5015] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 18.3%
+[261008-165231.371] [Port:5015] [System] ✔️RAM chiếm dụng: 150.90M | NLTK: 0.00M | CPU: 4.3%
+[261008-165237.739] [Port:5015] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-165238.648] [Port:5015] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-165238.649] [Port:5015] [System] ✔️RAM chiếm dụng: 138.61M | NLTK: 0.00M | CPU: 0.0%
+[261008-165238.660] [Port:5015] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-165238.697] [Port:5015] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-165238.697] [Port:5015] [System] ℹ️ Lấy domain từ database: sextop1.gdn
+[261008-165238.698] [Port:5015] [Sextop1] Đã load session từ database.
+[261008-165238.698] [Port:5015] [Sextop1] Warming up session... ⏳
+[261008-165238.698] [Port:5015] [Sextop1] Khởi tạo sync_tasks cho Sextop1...
+[261008-165238.698] [Port:5015] [System] ✔️ Sextop1 Player worker started at http://localhost:5015
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-165239.627] [Port:5015] [Sextop1] Session is warm. ✔️
+[261008-165243.650] [Port:5015] [System] ✔️RAM chiếm dụng: 151.28M | NLTK: 0.00M | CPU: 12.1%
+[261008-165248.650] [Port:5015] [System] ✔️RAM chiếm dụng: 151.28M | NLTK: 0.00M | CPU: 3.5%
+[261008-165253.651] [Port:5015] [System] ✔️RAM chiếm dụng: 151.28M | NLTK: 0.00M | CPU: 6.5%
+[261008-165258.652] [Port:5015] [System] ✔️RAM chiếm dụng: 151.28M | NLTK: 0.00M | CPU: 3.6%
+[261008-165303.653] [Port:5015] [System] ✔️RAM chiếm dụng: 151.28M | NLTK: 0.00M | CPU: 3.5%
+[261008-165308.654] [Port:5015] [System] ✔️RAM chiếm dụng: 151.36M | NLTK: 0.00M | CPU: 7.1%
+[261008-165313.655] [Port:5015] [System] ✔️RAM chiếm dụng: 151.36M | NLTK: 0.00M | CPU: 5.9%
+[261008-165318.656] [Port:5015] [System] ✔️RAM chiếm dụng: 151.36M | NLTK: 0.00M | CPU: 4.6%
+[261008-165323.657] [Port:5015] [System] ✔️RAM chiếm dụng: 151.36M | NLTK: 0.00M | CPU: 3.4%
+[261008-165328.657] [Port:5015] [System] ✔️RAM chiếm dụng: 151.36M | NLTK: 0.00M | CPU: 5.4%
+[261008-165331.755] [Port:5015] [System] ⚠️ Nhận tín hiệu dừng (Ctrl+C), đang lưu dữ liệu an toàn...
+[261008-165331.761] [Port:5015] [System] ✔️ Đã thoát an toàn.
+[261008-165801.229] [Port:5015] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-165802.216] [Port:5015] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-165802.218] [Port:5015] [System] ✔️RAM chiếm dụng: 138.43M | NLTK: 0.00M | CPU: 0.0%
+[261008-165802.227] [Port:5015] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-165802.264] [Port:5015] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-165802.264] [Port:5015] [System] ℹ️ Lấy domain từ database: sextop1.gdn
+[261008-165802.265] [Port:5015] [Sextop1] Đã load session từ database.
+[261008-165802.265] [Port:5015] [Sextop1] Warming up session... ⏳
+[261008-165802.265] [Port:5015] [Sextop1] Khởi tạo sync_tasks cho Sextop1...
+[261008-165802.266] [Port:5015] [System] ✔️ Sextop1 Player worker started at http://localhost:5015
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-165803.221] [Port:5015] [Sextop1] Session is warm. ✔️
+[261008-165807.219] [Port:5015] [System] ✔️RAM chiếm dụng: 151.05M | NLTK: 0.00M | CPU: 20.2%
+[261008-165809.257] [Port:5015] [API] 127.0.0.1 GET 200 /
+[261008-165809.500] [Port:5015] [API] 127.0.0.1 GET 200 /static/oneplayer/style.css?v=17
+[261008-165809.569] [Port:5015] [API] 127.0.0.1 GET 200 /static/oneplayer/config.js?v=17
+[261008-165809.571] [Port:5015] [API] 127.0.0.1 GET 200 /static/oneplayer/player.js?v=17
+[261008-165809.624] [Port:5015] [API] 127.0.0.1 GET 200 /static/oneplayer/explorer.js?v=17
+[261008-165809.625] [Port:5015] [API] 127.0.0.1 GET 200 /static/oneplayer/app.js?v=17
+[261008-165809.625] [Port:5015] [API] 127.0.0.1 GET 200 /manifest.json
+[261008-165809.654] [Port:5015] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-165809.655] [Port:5015] [API] 127.0.0.1 GET 200 /api/videos?sort_by=release_date&sort_asc=false&limit=12&offset=0&page=1&filter_has_cover=true
+[261008-165809.659] [Port:5015] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-165809.659] [Port:5015] [API] 127.0.0.1 GET 200 /api/categories/stats
+[261008-165809.664] [Port:5015] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-165809.665] [Port:5015] [API] 127.0.0.1 GET 200 /api/videos?sort_by=release_date&sort_asc=false&limit=12&offset=0&page=1&filter_has_cover=true
+[261008-165809.767] [Port:5015] [API] 127.0.0.1 GET 200 /static/favicon_sextop1.ico
+[261008-165809.774] [Port:5015] [API] 127.0.0.1 GET 200 /apple-icon.png
+[261008-165812.219] [Port:5015] [System] ✔️RAM chiếm dụng: 152.17M | NLTK: 0.00M | CPU: 69.0%
+[261008-165816.805] [Port:5015] [API] 127.0.0.1 GET 200 /api/media?id=thay-con-trai-mai-me-cong-viec-de-con-dau-co-don-bo-chong-lam-lieu-de-dit-con-dau
+[261008-165816.815] [Port:5015] [API] 127.0.0.1 GET 200 /api/media?id=anh-le-tan-khach-san-dep-trai-so-huong
+[261008-165816.821] [Port:5015] [API] 127.0.0.1 GET 200 /api/media?id=gai-hu-kyler-quinn-bi-day-do-nhung-roi-dau-van-vao-day
+[261008-165817.221] [Port:5015] [System] ✔️RAM chiếm dụng: 153.39M | NLTK: 0.00M | CPU: 18.9%
+[261008-165817.448] [Port:5015] [API] 127.0.0.1 GET 200 /api/media?id=mon-qua-sinh-nhat-bat-ngo-shen-nana-danh-tang-anh-nguoi-yeu
+[261008-165819.077] [Port:5015] [API] 127.0.0.1 GET 404 /api/media?id=bo-chong-chuoc-thuoc-kich-duc-con-dau-khi-biet-con-trai-di-cong-tac-dai-ngay
+[261008-165819.077] [Port:5015] [API] 127.0.0.1 GET 404 /api/media?id=trung-tri-chau-gai-lau-ca-vi-su-dung-dien-thoai-toi-ma-khong-xin-phep
+[261008-165819.078] [Port:5015] [API] 127.0.0.1 GET 404 /api/media?id=ngoai-tinh-voi-dong-nghiep-trong-ky-nghi-vietsub
+[261008-165819.090] [Port:5015] [API] 127.0.0.1 GET 404 /api/media?id=di-du-lich-voi-ban-than-roi-len-dit-nhau-voi-chong-cua-ban
+[261008-165819.091] [Port:5015] [API] 127.0.0.1 GET 404 /api/media?id=ban-tinh-ca-khien-ban-gai-thay-nung
+[261008-165819.106] [Port:5015] [API] 127.0.0.1 GET 404 /api/media?id=dem-giang-sinh-dang-nho-cua-gia-dinh-dam-loan
+[261008-165819.685] [Port:5015] [API] 127.0.0.1 GET 404 /api/media?id=chau-trai-o-nho-nha-di-lam-lieu-dit-di-tu-phia-sau-va-cai-ket
+[261008-165822.221] [Port:5015] [System] ✔️RAM chiếm dụng: 153.46M | NLTK: 0.00M | CPU: 10.3%
+[261008-165827.222] [Port:5015] [System] ✔️RAM chiếm dụng: 153.46M | NLTK: 0.00M | CPU: 11.4%
+[261008-165832.223] [Port:5015] [System] ✔️RAM chiếm dụng: 153.49M | NLTK: 0.00M | CPU: 11.7%
+[261008-165837.223] [Port:5015] [System] ✔️RAM chiếm dụng: 153.49M | NLTK: 0.00M | CPU: 7.0%
+[261008-165842.223] [Port:5015] [System] ✔️RAM chiếm dụng: 153.49M | NLTK: 0.00M | CPU: 4.9%
+[261008-165847.224] [Port:5015] [System] ✔️RAM chiếm dụng: 153.49M | NLTK: 0.00M | CPU: 9.5%
+[261008-165852.224] [Port:5015] [System] ✔️RAM chiếm dụng: 153.49M | NLTK: 0.00M | CPU: 12.6%
+[261008-165857.225] [Port:5015] [System] ✔️RAM chiếm dụng: 153.49M | NLTK: 0.00M | CPU: 21.0%
+[261008-165857.605] [Port:5015] [API] 192.168.102.100 GET 200 /
+[261008-165857.629] [Port:5015] [API] 192.168.102.100 GET 200 /static/oneplayer/style.css?v=17
+[261008-165857.630] [Port:5015] [API] 192.168.102.100 GET 200 /static/oneplayer/config.js?v=17
+[261008-165857.631] [Port:5015] [API] 192.168.102.100 GET 200 /static/oneplayer/player.js?v=17
+[261008-165857.633] [Port:5015] [API] 192.168.102.100 GET 200 /static/oneplayer/explorer.js?v=17
+[261008-165857.634] [Port:5015] [API] 192.168.102.100 GET 200 /static/oneplayer/app.js?v=17
+[261008-165857.801] [Port:5015] [API] 192.168.102.100 GET 200 /manifest.json
+[261008-165857.814] [Port:5015] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-165857.814] [Port:5015] [API] 192.168.102.100 GET 200 /api/videos?sort_by=release_date&sort_asc=false&limit=12&offset=0&page=1&filter_has_cover=true
+[261008-165857.814] [Port:5015] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-165857.815] [Port:5015] [API] 192.168.102.100 GET 200 /api/categories/stats
+[261008-165857.819] [Port:5015] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-165857.820] [Port:5015] [API] 192.168.102.100 GET 200 /api/videos?sort_by=release_date&sort_asc=false&limit=12&offset=0&page=1&filter_has_cover=true
+[261008-165857.893] [Port:5015] [API] 192.168.102.100 GET 200 /api/media?id=thay-con-trai-mai-me-cong-viec-de-con-dau-co-don-bo-chong-lam-lieu-de-dit-con-dau
+[261008-165857.907] [Port:5015] [API] 192.168.102.100 GET 200 /api/media?id=anh-le-tan-khach-san-dep-trai-so-huong
+[261008-165857.912] [Port:5015] [API] 192.168.102.100 GET 200 /api/media?id=gai-hu-kyler-quinn-bi-day-do-nhung-roi-dau-van-vao-day
+[261008-165900.166] [Port:5015] [API] 192.168.102.100 GET 404 /api/media?id=trung-tri-chau-gai-lau-ca-vi-su-dung-dien-thoai-toi-ma-khong-xin-phep
+[261008-165900.182] [Port:5015] [API] 192.168.102.100 GET 404 /api/media?id=ngoai-tinh-voi-dong-nghiep-trong-ky-nghi-vietsub
+[261008-165900.182] [Port:5015] [API] 192.168.102.100 GET 404 /api/media?id=bo-chong-chuoc-thuoc-kich-duc-con-dau-khi-biet-con-trai-di-cong-tac-dai-ngay
+[261008-165900.197] [Port:5015] [API] 192.168.102.100 GET 404 /api/media?id=dem-giang-sinh-dang-nho-cua-gia-dinh-dam-loan
+[261008-165900.198] [Port:5015] [API] 192.168.102.100 GET 404 /api/media?id=con-dau-sai-lam-khi-tin-bo-chong-dau-lung-khong-tam-duoc-nen-giup-ong
+[261008-165900.213] [Port:5015] [API] 192.168.102.100 GET 404 /api/media?id=di-du-lich-voi-ban-than-roi-len-dit-nhau-voi-chong-cua-ban
+[261008-165900.572] [Port:5015] [API] 192.168.102.100 GET 404 /api/media?id=ban-tinh-ca-khien-ban-gai-thay-nung
+[261008-165900.572] [Port:5015] [API] 192.168.102.100 GET 404 /api/media?id=chau-trai-o-nho-nha-di-lam-lieu-dit-di-tu-phia-sau-va-cai-ket
+[261008-165902.226] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 14.9%
+[261008-165907.227] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 3.6%
+[261008-165912.227] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 6.7%
+[261008-165917.228] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 4.4%
+[261008-165922.229] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 5.5%
+[261008-165927.230] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 9.5%
+[261008-165932.231] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 2.9%
+[261008-165937.231] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 1.5%
+[261008-165942.232] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 5.4%
+[261008-165947.233] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 2.9%
+[261008-165952.233] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 6.7%
+[261008-165957.234] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 11.7%
+[261008-170002.234] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 10.4%
+[261008-170007.235] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 11.9%
+[261008-170012.235] [Port:5015] [System] ✔️RAM chiếm dụng: 154.93M | NLTK: 0.00M | CPU: 12.7%
+[261008-170017.237] [Port:5015] [System] ✔️RAM chiếm dụng: 154.90M | NLTK: 0.00M | CPU: 12.3%
+[261008-170022.237] [Port:5015] [System] ✔️RAM chiếm dụng: 154.90M | NLTK: 0.00M | CPU: 3.7%
+[261008-170027.238] [Port:5015] [System] ✔️RAM chiếm dụng: 154.90M | NLTK: 0.00M | CPU: 8.7%
+[261008-170027.980] [Port:5015] [System] ⚠️ Nhận tín hiệu dừng (Ctrl+C), đang lưu dữ liệu an toàn...
+[261008-170027.983] [Port:5015] [System] ✔️ Đã thoát an toàn.
+[261008-224005.306] [Port:5015] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-224007.032] [Port:5015] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-224007.033] [Port:5015] [System] ✔️RAM chiếm dụng: 138.97M | NLTK: 0.00M | CPU: 0.0%
+[261008-224007.061] [Port:5015] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-224007.097] [Port:5015] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-224007.098] [Port:5015] [System] ℹ️ Lấy domain từ database: sextop1.gdn
+[261008-224007.099] [Port:5015] [Sextop1] Đã load session từ database.
+[261008-224007.099] [Port:5015] [Sextop1] Warming up session... ⏳
+[261008-224007.099] [Port:5015] [Sextop1] Khởi tạo sync_tasks cho Sextop1...
+[261008-224007.099] [Port:5015] [System] ✔️ Sextop1 Player worker started at http://localhost:5015
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-224008.010] [Port:5015] [Sextop1] Session is warm. ✔️
+[261008-224012.034] [Port:5015] [System] ✔️RAM chiếm dụng: 151.23M | NLTK: 0.00M | CPU: 7.3%
+[261008-224017.034] [Port:5015] [System] ✔️RAM chiếm dụng: 151.23M | NLTK: 0.00M | CPU: 4.8%
+[261008-225250.171] [Port:5015] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-225251.028] [Port:5015] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-225251.030] [Port:5015] [System] ✔️RAM chiếm dụng: 138.28M | NLTK: 0.00M | CPU: 0.0%
+[261008-225251.038] [Port:5015] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-225251.072] [Port:5015] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-225251.072] [Port:5015] [System] ℹ️ Lấy domain từ database: sextop1.gdn
+[261008-225251.073] [Port:5015] [Sextop1] Đã load session từ database.
+[261008-225251.073] [Port:5015] [Sextop1] Warming up session... ⏳
+[261008-225251.074] [Port:5015] [Sextop1] Khởi tạo sync_tasks cho Sextop1...
+[261008-225251.074] [Port:5015] [System] ✔️ Sextop1 Player worker started at http://localhost:5015
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-225251.949] [Port:5015] [Sextop1] Session is warm. ✔️
+[261008-225256.030] [Port:5015] [System] ✔️RAM chiếm dụng: 150.64M | NLTK: 0.00M | CPU: 5.8%
+[261008-225300.182] [Port:5015] [API] 127.0.0.1 GET 200 /
+[261008-225300.252] [Port:5015] [API] 127.0.0.1 GET 200 /static/oneplayer/style.css?v=17
+[261008-225300.253] [Port:5015] [API] 127.0.0.1 GET 200 /static/oneplayer/config.js?v=17
+[261008-225300.254] [Port:5015] [API] 127.0.0.1 GET 200 /static/oneplayer/player.js?v=17
+[261008-225300.377] [Port:5015] [API] 127.0.0.1 GET 200 /static/oneplayer/explorer.js?v=17
+[261008-225300.379] [Port:5015] [API] 127.0.0.1 GET 200 /static/oneplayer/app.js?v=17
+[261008-225300.381] [Port:5015] [API] 127.0.0.1 GET 200 /manifest.json
+[261008-225300.410] [Port:5015] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-225300.411] [Port:5015] [API] 127.0.0.1 GET 200 /api/videos?sort_by=release_date&sort_asc=false&limit=12&offset=0&page=1&filter_has_cover=true
+[261008-225300.415] [Port:5015] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-225300.416] [Port:5015] [API] 127.0.0.1 GET 200 /api/categories/stats
+[261008-225300.421] [Port:5015] [System] ⚠️ Không thể kết nối nextdjav.db (None): _path_normpath: path should be string, bytes or os.PathLike, not NoneType
+[261008-225300.422] [Port:5015] [API] 127.0.0.1 GET 200 /api/videos?sort_by=release_date&sort_asc=false&limit=12&offset=0&page=1&filter_has_cover=true
+[261008-225300.517] [Port:5015] [API] 127.0.0.1 GET 200 /apple-icon.png
+[261008-225301.032] [Port:5015] [System] ✔️RAM chiếm dụng: 151.88M | NLTK: 0.00M | CPU: 25.8%
+[261008-225306.036] [Port:5015] [System] ✔️RAM chiếm dụng: 151.88M | NLTK: 0.00M | CPU: 37.1%
+[261008-225309.680] [Port:5015] [API] 127.0.0.1 GET 200 /api/media?id=gai-hu-kyler-quinn-bi-day-do-nhung-roi-dau-van-vao-day
+[261008-225309.693] [Port:5015] [API] 127.0.0.1 GET 200 /api/media?id=anh-le-tan-khach-san-dep-trai-so-huong
+[261008-225309.698] [Port:5015] [API] 127.0.0.1 GET 200 /api/media?id=thay-con-trai-mai-me-cong-viec-de-con-dau-co-don-bo-chong-lam-lieu-de-dit-con-dau
+[261008-225311.037] [Port:5015] [System] ✔️RAM chiếm dụng: 152.41M | NLTK: 0.00M | CPU: 17.2%
+[261008-225311.733] [Port:5015] [API] 127.0.0.1 GET 404 /api/media?id=trung-tri-chau-gai-lau-ca-vi-su-dung-dien-thoai-toi-ma-khong-xin-phep
+[261008-225311.748] [Port:5015] [API] 127.0.0.1 GET 404 /api/media?id=bo-chong-chuoc-thuoc-kich-duc-con-dau-khi-biet-con-trai-di-cong-tac-dai-ngay
+[261008-225311.749] [Port:5015] [API] 127.0.0.1 GET 404 /api/media?id=di-du-lich-voi-ban-than-roi-len-dit-nhau-voi-chong-cua-ban
+[261008-225311.749] [Port:5015] [API] 127.0.0.1 GET 404 /api/media?id=ngoai-tinh-voi-dong-nghiep-trong-ky-nghi-vietsub
+[261008-225316.038] [Port:5015] [System] ✔️RAM chiếm dụng: 152.30M | NLTK: 0.00M | CPU: 14.7%
+[261008-225321.038] [Port:5015] [System] ✔️RAM chiếm dụng: 152.34M | NLTK: 0.00M | CPU: 17.8%
+[261008-225326.039] [Port:5015] [System] ✔️RAM chiếm dụng: 152.34M | NLTK: 0.00M | CPU: 6.8%
+[261008-225331.039] [Port:5015] [System] ✔️RAM chiếm dụng: 152.34M | NLTK: 0.00M | CPU: 13.5%
+[261008-225336.040] [Port:5015] [System] ✔️RAM chiếm dụng: 152.34M | NLTK: 0.00M | CPU: 8.5%
+[261008-225341.040] [Port:5015] [System] ✔️RAM chiếm dụng: 152.34M | NLTK: 0.00M | CPU: 8.4%
+[261008-225346.041] [Port:5015] [System] ✔️RAM chiếm dụng: 152.34M | NLTK: 0.00M | CPU: 5.5%
+[261008-225351.041] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 6.7%
+[261008-225356.042] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 9.1%
+[261008-225401.043] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 9.1%
+[261008-225406.043] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 8.2%
+[261008-225411.043] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 8.0%
+[261008-225416.044] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 6.9%
+[261008-225421.045] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 5.3%
+[261008-225426.045] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 25.8%
+[261008-225431.046] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 12.8%
+[261008-225436.046] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 3.5%
+[261008-225441.047] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 1.6%
+[261008-225446.048] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 9.0%
+[261008-225451.048] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 11.4%
+[261008-225456.049] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 13.6%
+[261008-225501.049] [Port:5015] [System] ✔️RAM chiếm dụng: 152.29M | NLTK: 0.00M | CPU: 15.2%
+[261008-225506.050] [Port:5015] [System] ✔️RAM chiếm dụng: 152.26M | NLTK: 0.00M | CPU: 17.1%
+[261008-225511.051] [Port:5015] [System] ✔️RAM chiếm dụng: 152.26M | NLTK: 0.00M | CPU: 25.4%
+[261008-225516.052] [Port:5015] [System] ✔️RAM chiếm dụng: 152.26M | NLTK: 0.00M | CPU: 13.4%
+[261008-225521.053] [Port:5015] [System] ✔️RAM chiếm dụng: 152.26M | NLTK: 0.00M | CPU: 11.7%
+[261008-225526.053] [Port:5015] [System] ✔️RAM chiếm dụng: 152.26M | NLTK: 0.00M | CPU: 7.6%
+[261008-225531.054] [Port:5015] [System] ✔️RAM chiếm dụng: 152.26M | NLTK: 0.00M | CPU: 8.5%
+[261008-225536.054] [Port:5015] [System] ✔️RAM chiếm dụng: 152.26M | NLTK: 0.00M | CPU: 2.3%
+[261008-225541.055] [Port:5015] [System] ✔️RAM chiếm dụng: 152.26M | NLTK: 0.00M | CPU: 1.8%
+[261008-225546.056] [Port:5015] [System] ✔️RAM chiếm dụng: 152.26M | NLTK: 0.00M | CPU: 2.6%
+[261008-225551.056] [Port:5015] [System] ✔️RAM chiếm dụng: 152.26M | NLTK: 0.00M | CPU: 2.3%
+[261008-225551.950] [Port:5015] [Sextop1] Warming up session... ⏳
+[261008-225552.845] [Port:5015] [Sextop1] Session is warm. ✔️
+[261008-225556.057] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 3.0%
+[261008-225601.058] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 5.1%
+[261008-225606.059] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 4.6%
+[261008-225611.060] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 4.1%
+[261008-225616.061] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 4.4%
+[261008-225621.062] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 2.0%
+[261008-225626.063] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 5.1%
+[261008-225631.064] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 12.6%
+[261008-225636.064] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 3.8%
+[261008-225641.065] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 7.8%
+[261008-225646.065] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 7.2%
+[261008-225651.066] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 4.7%
+[261008-225656.066] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 7.2%
+[261008-225701.067] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 7.3%
+[261008-225706.068] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 2.3%
+[261008-225711.068] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 3.9%
+[261008-225716.069] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 5.8%
+[261008-225721.069] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 12.3%
+[261008-225726.070] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 18.1%
+[261008-225731.070] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 13.3%
+[261008-225736.071] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 6.9%
+[261008-225741.072] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 1.7%
+[261008-225746.072] [Port:5015] [System] ✔️RAM chiếm dụng: 152.27M | NLTK: 0.00M | CPU: 4.0%
+[261008-225746.528] [Port:5015] [System] ⚠️ Nhận tín hiệu dừng (Ctrl+C), đang lưu dữ liệu an toàn...
+[261008-225746.531] [Port:5015] [System] ✔️ Đã thoát an toàn.
+[261008-225758.086] [Port:5015] [System] ✔️ Kiểm tra đủ package cơ bản...
+[261008-225758.957] [Port:5015] [System] ✔️ Đã xóa cache trong bộ nhớ khi khởi động.
+[261008-225758.959] [Port:5015] [System] ✔️RAM chiếm dụng: 138.47M | NLTK: 0.00M | CPU: 0.0%
+[261008-225758.966] [Port:5015] [System] ⏳ Đang tổng hợp dữ liệu actress, genre, maker...
+[261008-225758.997] [Port:5015] [System] ✔️ Hoàn tất tổng hợp tags.
+[261008-225758.998] [Port:5015] [System] ℹ️ Lấy domain từ database: sextop1.gdn
+[261008-225758.998] [Port:5015] [Sextop1] Đã load session từ database.
+[261008-225758.998] [Port:5015] [Sextop1] Warming up session... ⏳
+[261008-225758.998] [Port:5015] [Sextop1] Khởi tạo sync_tasks cho Sextop1...
+[261008-225758.999] [Port:5015] [System] ✔️ Sextop1 Player worker started at http://localhost:5015
+ * Serving Flask app 'server'
+ * Debug mode: off
+[261008-225759.893] [Port:5015] [Sextop1] Session is warm. ✔️
+[261008-225803.959] [Port:5015] [System] ✔️RAM chiếm dụng: 151.01M | NLTK: 0.00M | CPU: 4.0%
+[261008-225805.615] [Port:5015] [System] ⚠️ Nhận tín hiệu dừng (Ctrl+C), đang lưu dữ liệu an toàn...
+[261008-225805.618] [Port:5015] [System] ✔️ Đã thoát an toàn.

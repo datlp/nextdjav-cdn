@@ -27,6 +27,7 @@ def load_simple_env(env_path):
                         os.environ[k] = v
 
 load_simple_env(os.path.join(BASE_DIR, ".env"))
+load_simple_env(os.path.join(BASE_DIR, "..", ".env"))
 
 VOD_SOURCES = {
     "javtiful": {"port": int(os.environ.get("PORT_JAVTIFUL", "5012"))},
