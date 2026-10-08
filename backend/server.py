@@ -29,8 +29,15 @@ if hasattr(sys.stderr, 'reconfigure'):
 
 def custom_log(category, message):
     now = datetime.datetime.now()
-    timestamp = now.strftime('%y%m%d_%H%M%S_') + f"{now.microsecond // 1000:03d}"
-    print(f"{timestamp} [{category}] {message}", flush=True)
+    timestamp = now.strftime('%y%m%d-%H%M%S.') + f"{now.microsecond // 1000:03d}"
+    try:
+        import sys, os
+        port = next((sys.argv[i+1] for i, a in enumerate(sys.argv) if a in ('--port', '-port')), None)
+        if not port:
+            port = os.environ.get('PORT', '??')
+    except:
+        port = "??"
+    print(f"[{timestamp}] [Port:{port}] [{category}] {message}", flush=True)
 
 # Đưa custom_log vào builtins để các file source-*.py gọi được mà không cần import builtins
 builtins.custom_log = custom_log
@@ -760,6 +767,32 @@ _static_dir = os.path.join(_frontend_dir, 'static')
 app = Flask(__name__, static_folder=_static_dir, static_url_path='/static')
 app.config['JSON_AS_ASCII'] = False
 import logging
+
+import socket
+
+import logging
+from werkzeug.serving import WSGIRequestHandler
+import datetime
+def custom_log_request(self, code='-', size='-'):
+    if logging.getLogger('werkzeug').disabled:
+        return
+    now = datetime.datetime.now()
+    timestamp = now.strftime('%y%m%d-%H%M%S.') + f"{now.microsecond // 1000:03d}"
+    port = getattr(self.server, 'server_port', 'PORT')
+    print(f"[{timestamp}] [Port:{port}] {self.address_string()} - {self.requestline} {code}")
+WSGIRequestHandler.log_request = custom_log_request
+
+def get_lan_ip():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+        return ip
+    except Exception:
+        return "127.0.0.1"
+LAN_IP = get_lan_ip()
+
 log = logging.getLogger('werkzeug')
 log.disabled = True
 
@@ -1334,8 +1367,8 @@ def get_media():
                 db_dir = os.path.dirname(os.path.abspath(app_args.sqlite3)) if app_args and app_args.sqlite3 else '.'
                 source_name = getattr(scraper_instance, 'source_name', app_args.source if app_args else 'missav').lower()
                 
-                vault_dir = os.environ.get("VAULT_ROOT") or (None if os.name == 'nt' else "/sdcard/Vault")
-                
+                vault_dir = os.environ.get("VAULT_ROOT") or os.environ.get("WINDOWS_BIN_DIR") if os.name == 'nt' else os.environ.get("TERMUX_BIN_DIR")
+                if vault_dir is None: vault_dir = ""
                 # Tìm file bin tương ứng (ưu tiên trong Vault trước, sau đó fallback về db_dir)
                 bin_patterns = [
                     os.path.join(vault_dir, f"{source_name}_covers_{bin_id:04d}.bin"),
@@ -3094,6 +3127,7 @@ def main():
     signal.signal(signal.SIGTERM, graceful_exit)
 
     try:
+
         app.run(host='0.0.0.0', port=args.port, threaded=True, use_reloader=False)
     except KeyboardInterrupt:
         graceful_exit(None, None)
