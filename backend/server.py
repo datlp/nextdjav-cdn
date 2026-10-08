@@ -2882,9 +2882,9 @@ def migrate_old_database(db_conn, old_db_path):
     except Exception as e:
         custom_log("System", f"❌ Lỗi trong quá trình migration: {e}")
 
-def start_reloader():
-    # Không chạy reloader trên Termux/Android vì mtime trên FUSE/SMB không ổn định gây loop execv
-    if "TERMUX_VERSION" in os.environ or os.path.exists("/data/data/com.termux") or os.environ.get("NO_RELOAD"):
+def start_reloader(force_watch: bool = False):
+    # Nếu không có cờ watch rõ ràng thì bỏ qua trên Termux để tránh loop execv ngoài ý muốn
+    if not force_watch and ("TERMUX_VERSION" in os.environ or os.path.exists("/data/data/com.termux") or os.environ.get("NO_RELOAD")):
         return
     import glob
     def get_mtimes():
@@ -2951,6 +2951,7 @@ def main():
     parser.add_argument('-max_keepalive', type=int, default=10, help="Số khối buffer keepalive tối đa trong RAM")
     parser.add_argument('-timeout', type=str, default="connect=3.0,read=None", help="Cấu hình timeout proxy")
     parser.add_argument('-nextdjav-db', type=str, default=None, help="Đường dẫn đến file nextdjav.db (để quản lý upload queue và cờ GDrive)")
+    parser.add_argument('-w', '--watch', action='store_true', help="Kích hoạt Watchdog auto-restart khi sửa code")
     
     args = parser.parse_args()
     
@@ -3010,7 +3011,7 @@ def main():
     tags_cache = []
     custom_log("System", "✔️ Đã xóa cache trong bộ nhớ khi khởi động.")
 
-    start_reloader()
+    start_reloader(force_watch=getattr(args, 'watch', False))
     threading.Thread(target=system_monitor_worker, daemon=True).start()
     
     source_module = load_source_module(args.source)
