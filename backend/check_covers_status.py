@@ -4,7 +4,7 @@ import os
 sources = {
     'vlxx': (r'D:\Dat\Database\vlxx\vlxx.db', 'vlxx_videos', r'D:\Dat\Database\vlxx\vlxx_covers_0001.bin'),
     'javtiful': (r'D:\Dat\Database\javtiful\javtiful.db', 'javtiful_videos', r'D:\Dat\Database\javtiful\javtiful_covers_0001.bin'),
-    'missav': (r'D:\Dat\Database\missav\missav.db', 'missav_videos', r'D:\Dat\Database\missav\missav_covers_0001.bin')
+    'missav': (r'D:\Dat\Database\termux-services\missav.db', 'missav_videos', r'D:\Dat\Database\termux-services\missav\missav_covers_0001.bin')
 }
 
 for name, (db_path, table, bin_path) in sources.items():

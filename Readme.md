@@ -26,16 +26,16 @@ Hệ thống xem video và crawl dữ liệu đa nguồn (VOD) hiệu suất cao
 
 ### 💻 Trên Windows (PowerShell):
 ```powershell
-python backend/server.py -source javtiful -port 3012 -sqlite3 "D:\Dat\Database\javtiful\javtiful.db"
-python backend/server.py -source missav   -port 3013 -sqlite3 "D:\Dat\Database\missav\missav.db"
-python backend/server.py -source vlxx     -port 3014 -sqlite3 "D:\Dat\Database\vlxx\vlxx.db"
-python backend/server.py -source sextop1  -port 3015 -sqlite3 "D:\Dat\Database\sextop1\sextop1.db"
+python backend/server.py -source javtiful
+python backend/server.py -source missav  
+python backend/server.py -source vlxx    
+python backend/server.py -source sextop1 
 ```
 
 ### 📱 Trên Android (Termux):
 ```bash
-python /sdcard/Projects/crawl-vod/backend/server.py -source javtiful -port 3012 -sqlite3 "/sdcard/Database/javtiful/javtiful.db" &
-python /sdcard/Projects/crawl-vod/backend/server.py -source missav   -port 3013 -sqlite3 "/sdcard/Database/missav/missav.db" &
-python /sdcard/Projects/crawl-vod/backend/server.py -source vlxx     -port 3014 -sqlite3 "/sdcard/Database/vlxx/vlxx.db" &
-python /sdcard/Projects/crawl-vod/backend/server.py -source sextop1  -port 3015 -sqlite3 "/sdcard/Database/sextop1/sextop1.db" &
+python /sdcard/Projects/crawl-vod/backend/server.py -source javtiful &
+python /sdcard/Projects/crawl-vod/backend/server.py -source missav   &
+python /sdcard/Projects/crawl-vod/backend/server.py -source vlxx     &
+python /sdcard/Projects/crawl-vod/backend/server.py -source sextop1  &
 ```

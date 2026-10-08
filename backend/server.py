@@ -422,20 +422,13 @@ def get_nextdjav_conn():
     if not NEXTDJAV_DB_PATH:
         candidates = [
             getattr(app_args, 'nextdjav_db', None) if app_args else None,
-            "D:\\Dat\\Database\\dev\\nextdjav\\nextdjav.db",
-            "D:\\Dat\\Database\\prod\\nextdjav\\nextdjav.db",
-            "/sdcard/Database/dev/nextdjav/nextdjav.db",
-            "/sdcard/Database/prod/nextdjav/nextdjav.db",
-            "/sdcard/Database/nextdjav/nextdjav.db",
-            "D:\\Dat\\Database\\nextdjav\\nextdjav.db",
-            os.path.expanduser("~/Database/nextdjav/nextdjav.db")
         ]
         for c in candidates:
             if c and os.path.exists(c):
                 NEXTDJAV_DB_PATH = c
                 break
         if not NEXTDJAV_DB_PATH:
-            NEXTDJAV_DB_PATH = "D:\\Dat\\Database\\dev\\nextdjav\\nextdjav.db" if os.name == 'nt' else "/sdcard/Database/dev/nextdjav/nextdjav.db"
+            NEXTDJAV_DB_PATH = os.environ.get("WINDOWS_DB") if os.name == "nt" else os.environ.get("TERMUX_DB")
 
     try:
         os.makedirs(os.path.dirname(os.path.abspath(NEXTDJAV_DB_PATH)) or '.', exist_ok=True)
@@ -1341,7 +1334,7 @@ def get_media():
                 db_dir = os.path.dirname(os.path.abspath(app_args.sqlite3)) if app_args and app_args.sqlite3 else '.'
                 source_name = getattr(scraper_instance, 'source_name', app_args.source if app_args else 'missav').lower()
                 
-                vault_dir = os.environ.get("VAULT_ROOT") or (r"D:\Dat\Vault" if os.name == 'nt' else "/sdcard/Vault")
+                vault_dir = os.environ.get("VAULT_ROOT") or (None if os.name == 'nt' else "/sdcard/Vault")
                 
                 # Tìm file bin tương ứng (ưu tiên trong Vault trước, sau đó fallback về db_dir)
                 bin_patterns = [
@@ -2933,7 +2926,6 @@ def system_monitor_worker():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-port', type=int, default=5004, help="Port to run the HTTP server on")
     parser.add_argument('-sqlite3', type=str, default=None, help="Path to the SQLite3 database file")
     parser.add_argument('-upgrade-all', action='store_true', help="Start scanning from page 1 instead of backlog")
     parser.add_argument('-emailPass', type=str, default="szywozapustydcuw", help="App password for email")
@@ -2955,8 +2947,11 @@ def main():
     
     args = parser.parse_args()
     
-    if '-port' not in sys.argv and args.source == 'vlxx':
-        args.port = 5005
+    env_port = os.environ.get("PORT")
+    if not env_port:
+        print("[!] LỖI: Vui lòng cấu hình bắt buộc PORT trong file .env")
+        sys.exit(1)
+    args.port = int(env_port)
 
     if args.sqlite3 is None:
         if os.name == 'nt':
@@ -2966,11 +2961,11 @@ def main():
             else:
                 args.sqlite3 = f"D:\\Database\\{args.source}.db"
         else:
-            cand = f"/sdcard/Database/{args.source}/{args.source}.db"
+            cand = None
             if os.path.exists(cand):
                 args.sqlite3 = cand
             else:
-                args.sqlite3 = f"/sdcard/Projects/Database/{args.source}.db"
+                args.sqlite3 = None
             
     chunk_str = args.chunk_size.upper().replace('B', '')
     if chunk_str.endswith('M'):

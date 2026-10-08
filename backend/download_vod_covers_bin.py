@@ -35,9 +35,9 @@ SOURCES = {
         'timeout': 10
     },
     'missav': {
-        'db_path': r'D:\Dat\Database\missav\missav.db',
+        'db_path': r'D:\Dat\Database\termux-services\missav.db',
         'table_name': 'missav_videos',
-        'bin_path': r'D:\Dat\Database\missav\missav_covers_0001.bin',
+        'bin_path': r'D:\Dat\Database\termux-services\missav\missav_covers_0001.bin',
         'bin_id': 1,
         'referer': 'https://missav.ai/',
         'workers': 64,

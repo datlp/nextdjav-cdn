@@ -38,7 +38,7 @@ def main():
         sys.executable,
         os.path.join(BASE_DIR, "backend", "server.py"),
         "-source", source,
-        "-port", str(port),
+
     ]
     if db_path:
         cmd.extend(["-sqlite3", db_path])
