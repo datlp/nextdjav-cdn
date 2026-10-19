@@ -137,26 +137,109 @@ video.fit-cover {
     display: none !important;
 }
 
-/* Seek HUD ở top center khi tua (seek) */
+/* Fullscreen Seek Sprite Backdrop Preview: Hiển thị đúng bằng khung video khi tua */
+.seek-backdrop-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    opacity: 1;
+    transition: opacity 0.18s cubic-bezier(0.2, 0.9, 0.3, 1);
+    will-change: opacity;
+}
+
+.seek-backdrop-preview.hidden {
+    display: none !important;
+    opacity: 0 !important;
+}
+
+.seek-backdrop-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transform-origin: center center;
+}
+
+/* Tự động xoay 90 độ khi màn hình đang ở chế độ xoay ngang TikTok */
+.video-rotated-90 .seek-backdrop-canvas {
+    width: 100vh !important;
+    height: 100vw !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) rotate(90deg) !important;
+    object-fit: contain !important;
+}
+
+/* High-Speed Sprite Thumbnail & Swipe Seek HUD */
 #seek-hud {
     position: absolute;
-    top: 50px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 20px;
-    padding: 6px 16px;
-    font-size: 14.5px;
-    font-weight: 700;
-    color: #ffffff;
+    transform: translate(-50%, -50%);
     display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     pointer-events: none;
-    z-index: 30;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    z-index: 45;
+    transition: opacity 0.15s ease, transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.seek-sprite-preview {
+    display: none !important;
+}
+
+@media (min-width: 768px) {
+    .seek-sprite-preview {
+        width: 320px;
+        height: 180px;
+    }
+}
+
+.seek-sprite-canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.seek-sprite-time {
+    position: absolute;
+    bottom: 6px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
     letter-spacing: 0.5px;
+}
+
+.seek-hud-label {
+    background: rgba(18, 18, 24, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #ffffff;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 /* Smooth Transitions for Overlay Controls */
@@ -268,6 +351,30 @@ video.fit-cover {
     transform: scale(0.92);
 }
 
+/* Favorite Heart Button Styling */
+#btn-favorite {
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+#btn-favorite.is-favorited {
+    background: rgba(254, 44, 85, 0.25);
+    border-color: #fe2c55;
+    color: #fe2c55;
+    box-shadow: 0 0 16px rgba(254, 44, 85, 0.6);
+}
+
+#btn-favorite.is-favorited #icon-favorite {
+    font-variation-settings: 'FILL' 1;
+    color: #fe2c55;
+    animation: heartPulse 0.35s ease;
+}
+
+@keyframes heartPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.35); }
+    100% { transform: scale(1); }
+}
+
 /* Speed Button Styling */
 .speed-text {
     font-size: 13px;
@@ -308,52 +415,56 @@ video.fit-cover {
     color: #ffffff;
 }
 
-/* Tap Feedback Ripples (Nửa trái & Nửa phải) */
+/* Tap Feedback Ripples (Nửa trái Tua lùi -10s & Nửa phải Tua tới +10s) */
 .tap-ripple {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 35%;
-    height: 60%;
+    width: 38%;
+    height: 65%;
     display: flex;
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    z-index: 18;
+    z-index: 65;
     opacity: 0;
     transition: opacity 0.15s ease;
 }
 
 .tap-ripple.left {
     left: 0;
-    border-top-right-radius: 50%;
-    border-bottom-right-radius: 50%;
-    background: radial-gradient(circle at left center, rgba(254, 44, 85, 0.35) 0%, rgba(0, 0, 0, 0) 75%);
+    border-top-right-radius: 50% 100%;
+    border-bottom-right-radius: 50% 100%;
+    background: radial-gradient(circle at 10% 50%, rgba(254, 44, 85, 0.45) 0%, rgba(254, 44, 85, 0.18) 50%, rgba(0, 0, 0, 0) 80%);
 }
 
 .tap-ripple.right {
     right: 0;
-    border-top-left-radius: 50%;
-    border-bottom-left-radius: 50%;
-    background: radial-gradient(circle at right center, rgba(254, 44, 85, 0.35) 0%, rgba(0, 0, 0, 0) 75%);
+    border-top-left-radius: 50% 100%;
+    border-bottom-left-radius: 50% 100%;
+    background: radial-gradient(circle at 90% 50%, rgba(254, 44, 85, 0.45) 0%, rgba(254, 44, 85, 0.18) 50%, rgba(0, 0, 0, 0) 80%);
 }
 
 .tap-ripple.active {
-    animation: ripplePulse 0.55s ease-out forwards;
+    animation: ripplePulse 0.65s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
 }
 
 @keyframes ripplePulse {
     0% {
         opacity: 0;
-        transform: translateY(-50%) scale(0.8);
+        transform: translateY(-50%) scale(0.75);
     }
-    35% {
+    30% {
         opacity: 1;
-        transform: translateY(-50%) scale(1.05);
+        transform: translateY(-50%) scale(1.04);
+    }
+    70% {
+        opacity: 0.9;
+        transform: translateY(-50%) scale(1.02);
     }
     100% {
         opacity: 0;
-        transform: translateY(-50%) scale(1);
+        transform: translateY(-50%) scale(1.1);
     }
 }
 
@@ -363,18 +474,29 @@ video.fit-cover {
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+    background: rgba(18, 18, 24, 0.65);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+    padding: 12px 22px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(254, 44, 85, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .tap-ripple-content .tap-icon {
-    font-size: 38px;
+    font-size: 42px;
+    line-height: 1;
+    color: #ff3b5c;
+    text-shadow: 0 0 12px rgba(255, 59, 92, 0.8);
 }
 
 .tap-ripple-content .tap-text {
-    font-size: 13px;
-    font-weight: 700;
-    margin-top: 2px;
-    letter-spacing: 0.5px;
+    font-size: 15px;
+    font-weight: 800;
+    margin-top: 4px;
+    letter-spacing: 0.8px;
+    color: #ffffff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
 }
 
 /* OnePlayer Bottom Left Info */
@@ -1219,76 +1341,27 @@ video.fit-cover {
     background: rgba(239, 68, 68, 0.2);
 }
 
-/* Upload Queue Button States (Pill button with icon and label) */
-.progress-queue-btn {
-    border-radius: 12px;
-    width: auto;
-    min-width: 68px;
-    padding: 0 7px;
-    font-size: 10.5px;
-    font-weight: 700;
-    gap: 4px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(15, 23, 42, 0.75);
-    border: 1px solid rgba(168, 85, 247, 0.65);
-    color: #c084fc;
-    box-shadow: 0 2px 8px rgba(168, 85, 247, 0.25);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.progress-queue-btn:hover {
-    background: #8b5cf6;
-    color: #ffffff;
-    border-color: #a855f7;
-    box-shadow: 0 0 14px rgba(139, 92, 246, 0.6);
-    transform: scale(1.05);
-}
-
-.progress-queue-btn .queue-icon {
-    font-size: 15px;
-}
-
-.progress-queue-btn .queue-text {
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: 0.2px;
-    white-space: nowrap;
-}
-
+/* Upload Queue Button States */
 .progress-ctrl-btn.in-queue,
 .action-btn.in-queue {
-    background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%) !important;
-    border-color: rgba(251, 191, 36, 0.8) !important;
-    box-shadow: 0 0 14px rgba(245, 158, 11, 0.5) !important;
-    color: #ffffff !important;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.75) 0%, rgba(168, 85, 247, 0.75) 100%);
+    border-color: #818cf8;
+    box-shadow: 0 0 16px rgba(99, 102, 241, 0.6);
+    color: #ffffff;
 }
 
 .progress-ctrl-btn.in-queue:hover,
 .action-btn.in-queue:hover {
-    background: linear-gradient(135deg, #b45309 0%, #d97706 100%) !important;
-    border-color: #f59e0b !important;
-    box-shadow: 0 0 16px rgba(245, 158, 11, 0.75) !important;
-}
-
-.progress-ctrl-btn.in-queue .queue-icon {
-    animation: queueHourglassSpin 3s infinite ease-in-out;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.9) 0%, rgba(168, 85, 247, 0.9) 100%);
+    border-color: #a5b4fc;
 }
 
 .progress-ctrl-btn.has-gdrive,
 .action-btn.has-gdrive {
-    background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
-    border-color: rgba(52, 211, 153, 0.8) !important;
-    box-shadow: 0 0 14px rgba(16, 185, 129, 0.5) !important;
-    color: #ffffff !important;
-}
-
-.progress-ctrl-btn.has-gdrive:hover,
-.action-btn.has-gdrive:hover {
-    background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-    border-color: #34d399 !important;
-    box-shadow: 0 0 16px rgba(16, 185, 129, 0.75) !important;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.75) 0%, rgba(5, 150, 105, 0.75) 100%);
+    border-color: #34d399;
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.6);
+    color: #ffffff;
 }
 
 /* Stream Source Variants Styling */
@@ -5314,42 +5387,15 @@ body.theme-black .settings-group {
     box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
     cursor: pointer;
     animation: queueBadgePulse 2s infinite ease-in-out;
-    position: relative;
-    overflow: hidden;
-}
-
-.badge-gdrive-status.in-queue .icon-hover,
-.badge-gdrive-status.in-queue .lbl-hover {
-    display: none;
-}
-
-.badge-gdrive-status.in-queue .icon-default,
-.badge-gdrive-status.in-queue .lbl-default {
-    display: inline-flex;
-    align-items: center;
 }
 
 .badge-gdrive-status.in-queue:hover {
-    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
-    border-color: #f87171;
-    color: #ffffff;
+    background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+    border-color: #f59e0b;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.5);
-    animation: none;
 }
 
-.badge-gdrive-status.in-queue:hover .icon-default,
-.badge-gdrive-status.in-queue:hover .lbl-default {
-    display: none;
-}
-
-.badge-gdrive-status.in-queue:hover .icon-hover,
-.badge-gdrive-status.in-queue:hover .lbl-hover {
-    display: inline-flex;
-    align-items: center;
-}
-
-.badge-gdrive-status.in-queue .material-symbols-outlined.icon-default {
+.badge-gdrive-status.in-queue .material-symbols-outlined {
     animation: queueHourglassSpin 3s infinite ease-in-out;
 }
 
@@ -6504,35 +6550,62 @@ body.mode-gdrive-only #explorer-tab-foryou {
     animation: shimmer-sweep 1.4s ease-in-out infinite;
 }
 
-/* 2. SEEKBAR BUBBLE THUMBNAIL */
+/* 2. YOUTUBE-STYLE SEEKBAR BUBBLE THUMBNAIL */
 .seek-preview-bubble {
     position: absolute;
-    bottom: 18px;
+    bottom: 24px;
     transform: translateX(-50%);
-    background: rgba(18, 18, 24, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    padding: 4px 10px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    background: transparent;
     pointer-events: none;
-    z-index: 50;
+    z-index: 60;
     white-space: nowrap;
-    transition: opacity 0.15s ease, transform 0.1s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.12s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.1s ease;
 }
 
 .seek-preview-bubble.hidden {
     opacity: 0;
     pointer-events: none;
+    transform: translateX(-50%) translateY(4px);
+}
+
+.seek-bubble-thumbnail {
+    width: 160px;
+    height: 90px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85), 0 2px 8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.seek-bubble-thumbnail .seek-bubble-canvas,
+.seek-bubble-thumbnail .seek-bubble-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .seek-preview-time {
-    font-size: 13px;
+    font-size: 11.5px;
     font-weight: 700;
     color: #ffffff;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
     font-variant-numeric: tabular-nums;
+    padding: 3px 8px;
+    background: rgba(15, 15, 20, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
 /* ==========================================================================

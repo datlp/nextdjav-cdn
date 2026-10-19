@@ -2732,45 +2732,117 @@ def identity_reset_password():
         else:
             return jsonify({"success": False, "error": "OTP không hợp lệ."})
 
+_djav_cdn_fav_col = None
+
+def get_djav_cdn_fav_col():
+    global _djav_cdn_fav_col
+    if _djav_cdn_fav_col is not None:
+        return _djav_cdn_fav_col
+    try:
+        from pymongo import MongoClient
+        uri = os.environ.get("DJAV_FAVORITE_DB_URI")
+        if not uri:
+            from dotenv import dotenv_values
+            env_map = dotenv_values(os.path.join(os.path.dirname(__file__), "..", "..", ".env"))
+            uri = env_map.get("DJAV_FAVORITE_DB_URI")
+        if uri:
+            client = MongoClient(uri, serverSelectionTimeoutMS=5000)
+            db = client.get_default_database()
+            _djav_cdn_fav_col = db["favorite_codes"]
+            return _djav_cdn_fav_col
+    except Exception as e:
+        custom_log("Favorites", f"⚠️ MongoDB Favorite connection error: {e}")
+    return None
+
 @app.route('/api/favorites/toggle', methods=['POST'])
 def favorites_toggle():
     payload = request.get_json(silent=True) or {}
-    identifier = get_identifier()
-    if not identifier:
-        return jsonify({"success": False, "error": "Unauthorized"}), 401
-        
-    video_id = payload.get('video_id')
-    action = payload.get('action', 'toggle')
-    with db_lock:
-        cursor = db_conn_instance.cursor()
-        cursor.execute("SELECT 1 FROM favorites WHERE username = ? AND video_id = ?", (identifier, video_id))
-        exists = cursor.fetchone()
-        if exists:
-            if action == 'add':
-                return jsonify({"success": True, "added": True})
-            cursor.execute("DELETE FROM favorites WHERE username = ? AND video_id = ?", (identifier, video_id))
-            db_conn_instance.commit()
-            return jsonify({"success": True, "added": False})
-        else:
-            if action == 'remove':
-                return jsonify({"success": True, "added": False})
-            now_dt = time.strftime('%Y-%m-%d %H:%M:%S')
-            cursor.execute("INSERT INTO favorites (username, video_id, added_at) VALUES (?, ?, ?)", (identifier, video_id, now_dt))
-            db_conn_instance.commit()
-            return jsonify({"success": True, "added": True})
+    video_id = str(payload.get('video_id') or payload.get('code') or payload.get('id') or '').strip().upper()
+    if not video_id:
+        return jsonify({"success": False, "error": "Missing video code"}), 400
+
+    col = get_djav_cdn_fav_col()
+    is_favorited = False
+    if col is not None:
+        try:
+            existing = col.find_one({"_id": video_id})
+            if existing:
+                col.delete_one({"_id": video_id})
+                is_favorited = False
+            else:
+                doc = {
+                    "_id": video_id,
+                    "code": video_id,
+                    "title": payload.get("title") or video_id,
+                    "poster_url": payload.get("poster_url") or payload.get("cover_url") or f"/api/proxy?code={video_id}&type=cover",
+                    "cover_url": payload.get("cover_url") or f"/api/proxy?code={video_id}&type=cover",
+                    "release_date": payload.get("release_date") or "",
+                    "studio": payload.get("studio") or payload.get("maker") or "",
+                    "actress": payload.get("actress") or "",
+                    "created_at": datetime.datetime.utcnow().isoformat() + "Z"
+                }
+                col.replace_one({"_id": video_id}, doc, upsert=True)
+                is_favorited = True
+        except Exception as e:
+            custom_log("Favorites", f"⚠️ Error toggling in MongoDB: {e}")
+
+    # Đồng bộ song song vào bảng local favorites
+    identifier = get_identifier() or "anonymous"
+    try:
+        with db_lock:
+            cursor = db_conn_instance.cursor()
+            cursor.execute("SELECT 1 FROM favorites WHERE username = ? AND video_id = ?", (identifier, video_id))
+            exists = cursor.fetchone()
+            if is_favorited and not exists:
+                now_dt = time.strftime('%Y-%m-%d %H:%M:%S')
+                cursor.execute("INSERT OR REPLACE INTO favorites (username, video_id, added_at) VALUES (?, ?, ?)", (identifier, video_id, now_dt))
+                db_conn_instance.commit()
+            elif not is_favorited and exists:
+                cursor.execute("DELETE FROM favorites WHERE username = ? AND video_id = ?", (identifier, video_id))
+                db_conn_instance.commit()
+    except Exception:
+        pass
+
+    return jsonify({"success": True, "added": is_favorited, "favorited": is_favorited})
 
 @app.route('/api/favorites/status', methods=['GET'])
 def favorites_status():
+    video_id = str(request.args.get('video_id') or request.args.get('code') or request.args.get('id') or '').strip().upper()
+    if not video_id:
+        return jsonify({"is_favorited": False, "favorited": False})
+
+    col = get_djav_cdn_fav_col()
+    if col is not None:
+        try:
+            doc = col.find_one({"_id": video_id})
+            if doc is not None:
+                return jsonify({"is_favorited": True, "favorited": True})
+        except Exception as e:
+            pass
+
     identifier = get_identifier()
     if not identifier:
-        return jsonify({"is_favorited": False})
+        return jsonify({"is_favorited": False, "favorited": False})
         
-    video_id = request.args.get('video_id')
     with db_lock:
         cursor = db_conn_instance.cursor()
         cursor.execute("SELECT 1 FROM favorites WHERE username = ? AND video_id = ?", (identifier, video_id))
         exists = cursor.fetchone()
-    return jsonify({"is_favorited": bool(exists)})
+    return jsonify({"is_favorited": bool(exists), "favorited": bool(exists)})
+
+@app.route('/api/favorites', methods=['GET'])
+def api_favorites_cdn_list():
+    col = get_djav_cdn_fav_col()
+    if col is None:
+        return jsonify({"success": False, "error": "MongoDB unavailable", "favorites": []})
+    try:
+        docs = list(col.find().sort("created_at", -1).limit(200))
+        for d in docs:
+            d["id"] = d.get("_id")
+        return jsonify({"success": True, "favorites": docs, "total": len(docs)})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e), "favorites": []}), 500
+
 
 @app.route('/api/history/record', methods=['POST'])
 def history_record():

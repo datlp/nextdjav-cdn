@@ -62,9 +62,71 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoStudioContainer = document.getElementById('video-studio-container');
     const videoActressContainer = document.getElementById('video-actress-container');
     const videoBottomTagsContainer = document.getElementById('video-bottom-tags');
+    const btnFavorite = document.getElementById('btn-favorite');
+    const iconFavorite = document.getElementById('icon-favorite');
     let currentVideoInfo = null;
     let carouselVideosCache = [];
     let currentCarouselThreadId = null;
+
+    // Helper kiểm tra và cập nhật trạng thái Yêu thích (MongoDB)
+    async function checkFavoriteStatus(info) {
+        if (!btnFavorite || !iconFavorite || !info) return;
+        const targetId = info.thread_id || info.code || info.filename || '';
+        if (!targetId) return;
+        try {
+            const res = await fetch(`${backendHost}/api/favorites/status?id=${encodeURIComponent(targetId)}`, { credentials: 'include' });
+            const data = await res.json();
+            const isFav = !!(data && (data.favorited || data.is_favorited));
+            btnFavorite.classList.toggle('is-favorited', isFav);
+            iconFavorite.innerText = isFav ? 'favorite' : 'favorite_border';
+        } catch (e) {
+            console.error('[Favorites] Error checking status:', e);
+        }
+    }
+
+    if (btnFavorite) {
+        btnFavorite.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            if (!currentVideoInfo) return;
+            const targetId = currentVideoInfo.thread_id || currentVideoInfo.code || currentVideoInfo.filename || '';
+            if (!targetId) return;
+
+            const payload = {
+                id: targetId,
+                code: currentVideoInfo.code || targetId,
+                thread_id: currentVideoInfo.thread_id || '',
+                thread_name: currentVideoInfo.thread_name || currentVideoInfo.title || '',
+                title: currentVideoInfo.title || currentVideoInfo.thread_name || targetId,
+                poster_url: currentVideoInfo.poster_url || currentVideoInfo.cover_url || '',
+                cover_url: currentVideoInfo.cover_url || currentVideoInfo.poster_url || '',
+                release_date: currentVideoInfo.release_date || '',
+                studio: currentVideoInfo.studio || currentVideoInfo.maker || '',
+                box_id: currentVideoInfo.box_id || '',
+                box_name: currentVideoInfo.box_name || currentVideoInfo.studio || '',
+                first_media_id: currentVideoInfo.code || '',
+                video_count: currentVideoInfo.video_count || 1
+            };
+
+            try {
+                btnFavorite.style.pointerEvents = 'none';
+                const res = await fetch(`${backendHost}/api/favorites/toggle`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                const isFav = !!(data && (data.favorited || data.added));
+                btnFavorite.classList.toggle('is-favorited', isFav);
+                if (iconFavorite) iconFavorite.innerText = isFav ? 'favorite' : 'favorite_border';
+            } catch (err) {
+                console.error('[Favorites] Error toggling favorite:', err);
+            } finally {
+                btnFavorite.style.pointerEvents = 'auto';
+            }
+        });
+    }
+
 
     // 1. Danh sách từ vô nghĩa phổ biến tiếng Anh & từ rác trong tiêu đề phim
     const TITLE_STOPWORDS = new Set([
@@ -493,6 +555,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Render Persistent Video Carousel Bar
         renderVideoCarousel(info);
+
+        // Check & Update Favorite Heart Icon (MongoDB)
+        checkFavoriteStatus(info);
     }
 
     /**
@@ -662,7 +727,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const streamUrl = info.stream_url || info.video_url || info.url || '';
 
         // Phân biệt chế độ GDrive-only vs CDN
-        const isGDriveMode = !!(window.__IS_GDRIVE_ONLY__ || (window.location.port === '3001') || (window.location.port === '3005'));
+        const isGDriveMode = !!(window.__IS_GDRIVE_ONLY__ || ['3001', '3005', '3011', '5011'].includes(window.location.port));
 
         const sources = [];
         if (isGDriveMode) {
@@ -695,52 +760,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return { sources, preferredId: 'cdn' };
     }
 
-    async function resolvePlayableStreamUrl(info, coverSrc) {
-        let playUrl = info.stream_url || info.video_url || info.url || '';
-        const needsResolve = !playUrl || playUrl.startsWith('/api/video_url') || 
-            (!playUrl.startsWith('http://') && !playUrl.startsWith('https://') && !playUrl.startsWith('/api/gdrive/') && !playUrl.startsWith('/api/proxy'));
-
-        if (needsResolve) {
-            const vidId = info.id || info.code || info.filename;
-            if (player && player.showLoading) {
-                player.showLoading({
-                    title: info.title || info.code || info.filename,
-                    coverSrc: coverSrc,
-                    status: '⏳ Đang trích xuất luồng video...'
-                });
-            }
-            try {
-                const fetchUrl = (playUrl && playUrl.startsWith('/api/video_url'))
-                    ? `${backendHost}${playUrl}`
-                    : `${backendHost}/api/video_url?id=${encodeURIComponent(vidId)}`;
-                const res = await fetch(fetchUrl);
-                const data = await res.json();
-                if (data && data.success && data.url) {
-                    let cleanUrl = data.url.split('#')[0];
-                    if (cleanUrl.includes('.m3u8') || cleanUrl.includes('.vl')) {
-                        playUrl = `/api/proxy?url=${encodeURIComponent(cleanUrl)}`;
-                    } else {
-                        playUrl = cleanUrl;
-                    }
-                    info.stream_url = playUrl;
-                    info.url = playUrl;
-                } else {
-                    console.warn('[OnePlayer] Could not resolve video URL:', data);
-                    return null;
-                }
-            } catch (e) {
-                console.error('[OnePlayer] Error resolving video URL:', e);
-                return null;
-            }
-        }
-        return playUrl;
-    }
-
     // Khởi tạo Explorer Modal
     explorer = new VODExplorer({
         backendHost: backendHost,
-        onVideoSelect: async (info) => {
-            if (info && (info.code || info.filename || info.stream_url || info.video_url || info.id)) {
+        onVideoSelect: (info) => {
+            if (info && (info.code || info.filename || info.stream_url || info.video_url)) {
                 const code = (info.code || info.filename || '').toUpperCase();
                 if (info.filename || info.code) explorer.setCurrentPlayingFilename(info.filename || info.code);
 
@@ -761,13 +785,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 player.setVideoPathAndFavorite(info.path || info.code, info.favorited, info.filename || info.code, info.title, false, hasGDrive);
                 
                 const coverSrc = info.cover_url || info.coverUrl || `/api/poster/${encodeURIComponent(code)}`;
-                const resolvedUrl = await resolvePlayableStreamUrl(info, coverSrc);
-
                 const { sources, preferredId } = buildStreamSources(info);
                 player.setSources(sources, preferredId);
 
                 const activeSrc = sources.find(s => s.id === preferredId) || sources[0];
-                const playUrl = resolvedUrl || (activeSrc ? activeSrc.url : (info.stream_url || info.video_url || ''));
+                const playUrl = activeSrc ? activeSrc.url : (info.stream_url || info.video_url || '');
 
                 if (code) {
                     if (window.location.pathname !== `/${code}`) {
@@ -781,6 +803,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (playUrl) {
                     const effectiveStartTime = (info.start_offset_sec && info.start_offset_sec > 0) ? info.start_offset_sec : 0;
                     player.loadStream(playUrl, {
+                        code: info.code || code,
                         title: info.title || info.code,
                         coverSrc: coverSrc,
                         startTime: effectiveStartTime,
@@ -790,7 +813,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     player.showLoading({
                         title: info.title || info.code,
                         coverSrc: coverSrc,
-                        status: '⚠️ Video này chưa có link phát hoặc đang cào!'
+                        status: '⚠️ Video này chưa có link phát!'
                     });
                 }
             }
@@ -843,12 +866,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const hasGDrive = !!(video.is_gdrive || video.hasGDrive || video.gdrive_video_id);
             player.setVideoPathAndFavorite(targetCode, false, targetCode, video.title, false, hasGDrive);
             const coverSrc = video.cover_url || video.coverUrl || `/api/poster/${encodeURIComponent(targetCode)}`;
-            const resolvedUrl = await resolvePlayableStreamUrl(video, coverSrc);
 
             const { sources, preferredId } = buildStreamSources(video);
             player.setSources(sources, preferredId);
             const activeSrc = sources.find(s => s.id === preferredId) || sources[0];
-            const playUrl = resolvedUrl || (activeSrc ? activeSrc.url : (video.stream_url || video.video_url || ''));
+            const playUrl = activeSrc ? activeSrc.url : (video.stream_url || video.video_url || '');
 
             if (window.location.pathname !== `/play/${targetCode}` && window.location.pathname !== `/${targetCode}`) {
                 window.history.replaceState(null, '', `/play/${targetCode}`);
@@ -865,6 +887,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     : ((video.start_offset_sec && video.start_offset_sec > 0) ? video.start_offset_sec : 0);
 
                 player.loadStream(playUrl, {
+                    code: video.code || targetCode,
                     title: video.title || targetCode,
                     coverSrc: coverSrc,
                     startTime: effectiveStartTime,
