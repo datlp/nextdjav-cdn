@@ -2348,7 +2348,7 @@ def api_oneplayer_gdrive_info(code):
 
     try:
         cur = conn.cursor()
-        cur.execute("SELECT code, title, file_id, drive, filename, file_size FROM drive_videos WHERE upper(code) = ?", (code_clean,))
+        cur.execute("SELECT code, title, file_id, drive, filename, file_size, path FROM drive_videos WHERE upper(code) = ?", (code_clean,))
         r = cur.fetchone()
         conn.close()
         if r:
@@ -2361,7 +2361,8 @@ def api_oneplayer_gdrive_info(code):
                     "drive": r[3],
                     "driveName": r[3],
                     "filename": r[4],
-                    "fileSize": r[5]
+                    "fileSize": r[5],
+                    "path": r[6] or ""
                 }
             })
         return jsonify({"success": False, "message": "Chưa có trên Google Drive"}), 404

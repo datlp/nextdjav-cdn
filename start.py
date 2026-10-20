@@ -27,15 +27,26 @@ def load_simple_env(env_path):
                         os.environ[k] = v
 
 load_simple_env(os.path.join(BASE_DIR, ".env"))
-load_simple_env(os.path.join(BASE_DIR, "..", ".env"))
-
-VOD_SOURCES = {
-    "javtiful": {"port": int(os.environ.get("PORT_JAVTIFUL", "5012"))},
-    "missav":   {"port": int(os.environ.get("PORT_MISSAV", "5013"))},
-    "vlxx":     {"port": int(os.environ.get("PORT_VLXX", "5014"))},
-    "sextop1":  {"port": int(os.environ.get("PORT_SEXTOP1", "5015"))},
-    "javguru":  {"port": int(os.environ.get("PORT_JAVGURU", "5016"))},
+_vod_port_configs = {
+    "javtiful": "PORT_JAVTIFUL",
+    "missav":   "PORT_MISSAV",
+    "vlxx":     "PORT_VLXX",
+    "sextop1":  "PORT_SEXTOP1",
+    "javguru":  "PORT_JAVGURU",
 }
+
+VOD_SOURCES = {}
+_missing_vod_ports = []
+for src_key, env_key in _vod_port_configs.items():
+    val = os.environ.get(env_key)
+    if not val:
+        _missing_vod_ports.append(env_key)
+    else:
+        VOD_SOURCES[src_key] = {"port": int(val)}
+
+if _missing_vod_ports:
+    print(f"[!] LỖI: Không tìm thấy các cổng VOD trong ../.env: {', '.join(_missing_vod_ports)}. Vui lòng cấu hình bắt buộc trong .env!")
+    sys.exit(1)
 
 def kill_port(port: int):
     """Giết tiến trình đang chiếm port"""
@@ -72,14 +83,11 @@ def resolve_db_path(source: str):
     return None
 
 def main():
-    env_mode = os.environ.get("APP_ENV", "prod").lower()
-
     nextdjav_db = os.environ.get("WINDOWS_NEXTDJAV_DB") if sys.platform == "win32" else os.environ.get("TERMUX_NEXTDJAV_DB")
     
     print(f"==================================================")
     print(f" 🚀 KHỞI CHẠY HỆ THỐNG VOD CDN (NEXTDJAV-CDN)")
     print(f"==================================================")
-    print(f" Môi trường: {env_mode.upper()}")
 
     processes = []
     log_dir = os.path.join(BASE_DIR, "logs")
