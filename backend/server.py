@@ -442,32 +442,23 @@ def get_nextdjav_conn():
         c = sqlite3.connect(NEXTDJAV_DB_PATH, check_same_thread=False, timeout=5.0)
         c.execute('PRAGMA journal_mode=WAL;')
         c.execute('PRAGMA busy_timeout=5000;')
-        # Tự động đảm bảo bảng media_upload_queue tồn tại
-        c.execute('''
-            CREATE TABLE IF NOT EXISTS media_upload_queue (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                media_id TEXT UNIQUE NOT NULL,
-                thread_id TEXT,
-                source TEXT NOT NULL,
-                title TEXT,
-                file_name TEXT NOT NULL,
-                original_url TEXT NOT NULL,
-                poster_url TEXT,
-                target_folder TEXT DEFAULT '/NextDJAV/Videos',
-                status TEXT DEFAULT 'pending',
-                retry_count INTEGER DEFAULT 0,
-                claimed_by TEXT,
-                claimed_at DATETIME,
-                error_message TEXT,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-            )
-        ''')
-        c.execute('CREATE INDEX IF NOT EXISTS idx_media_upload_queue_status ON media_upload_queue(status, created_at)')
-        c.commit()
         return c
     except Exception as e:
         custom_log("System", f"⚠️ Không thể kết nối nextdjav.db ({NEXTDJAV_DB_PATH}): {e}")
+        return None
+
+def get_uploader_db_conn():
+    """Kết nối tới in-memory-gdrive-uploader.db chuyên biệt cho hàng đợi tải lên."""
+    global NEXTDJAV_DB_PATH
+    db_dir = os.path.dirname(os.path.abspath(NEXTDJAV_DB_PATH)) if NEXTDJAV_DB_PATH else r"D:\Dat\Database\termux-services"
+    up_db_path = os.path.join(db_dir, "in-memory-gdrive-uploader.db")
+    try:
+        c = sqlite3.connect(up_db_path, check_same_thread=False, timeout=5.0)
+        c.execute('PRAGMA journal_mode=WAL;')
+        c.execute('PRAGMA busy_timeout=5000;')
+        return c
+    except Exception as e:
+        custom_log("System", f"⚠️ Không thể kết nối in-memory-gdrive-uploader.db ({up_db_path}): {e}")
         return None
 
 def get_nextdjav_status_maps(codes):
@@ -497,13 +488,18 @@ def get_nextdjav_status_maps(codes):
         except Exception:
             pass
 
-        # 2. Kiểm tra video đang trong hàng đợi tải (pending / claimed / uploading)
-        try:
-            cur.execute(f"SELECT upper(media_id) FROM media_upload_queue WHERE status IN ('pending', 'claimed', 'uploading') AND upper(media_id) IN ({placeholders})", clean_codes)
-            for r in cur.fetchall():
-                if r[0]: in_queue_set.add(r[0].strip().upper())
-        except Exception:
-            pass
+        # 2. Kiểm tra video đang trong hàng đợi tải (pending / claimed / uploading) từ in-memory-gdrive-uploader.db
+        up_conn = get_uploader_db_conn()
+        if up_conn:
+            try:
+                up_cur = up_conn.cursor()
+                up_cur.execute(f"SELECT upper(media_id) FROM media_upload_queue WHERE status IN ('pending', 'claimed', 'uploading') AND upper(media_id) IN ({placeholders})", clean_codes)
+                for r in up_cur.fetchall():
+                    if r[0]: in_queue_set.add(r[0].strip().upper())
+                up_conn.close()
+            except Exception:
+                try: up_conn.close()
+                except: pass
 
         conn.close()
     except Exception as e:
@@ -2088,10 +2084,10 @@ def search_suggestions():
 
 @app.route('/api/queue', methods=['GET', 'POST', 'DELETE'])
 def api_oneplayer_queue():
-    """Quản lý hàng đợi tải lên Google Drive (Add Queue / Remove Queue / List Queue)."""
-    conn = get_nextdjav_conn()
+    """Quản lý hàng đợi tải lên Google Drive (Add Queue / Remove Queue / List Queue) qua in-memory-gdrive-uploader.db."""
+    conn = get_uploader_db_conn()
     if not conn:
-        return jsonify({"success": False, "error": "Không thể kết nối cơ sở dữ liệu nextdjav.db"}), 500
+        return jsonify({"success": False, "error": "Không thể kết nối cơ sở dữ liệu in-memory-gdrive-uploader.db"}), 500
 
     try:
         cur = conn.cursor()
@@ -2213,7 +2209,7 @@ def api_oneplayer_categories_stats():
         cursor.execute(f"SELECT COUNT(*) FROM {VIDEOS_TABLE}")
         total = cursor.fetchone()[0]
 
-    # Đếm số lượng video gdrive & queue từ nextdjav.db
+    # Đếm số lượng video gdrive & queue từ nextdjav.db & in-memory-gdrive-uploader.db
     gdrive_cnt = 0
     queue_cnt = 0
     conn = get_nextdjav_conn()
@@ -2222,11 +2218,21 @@ def api_oneplayer_categories_stats():
             cur = conn.cursor()
             cur.execute("SELECT count(*) FROM drive_videos")
             gdrive_cnt = cur.fetchone()[0]
-            cur.execute("SELECT count(*) FROM media_upload_queue WHERE status IN ('pending', 'claimed', 'uploading')")
-            queue_cnt = cur.fetchone()[0]
             conn.close()
         except Exception:
-            pass
+            try: conn.close()
+            except: pass
+
+    up_conn = get_uploader_db_conn()
+    if up_conn:
+        try:
+            up_cur = up_conn.cursor()
+            up_cur.execute("SELECT count(*) FROM media_upload_queue WHERE status IN ('pending', 'claimed', 'uploading')")
+            queue_cnt = up_cur.fetchone()[0]
+            up_conn.close()
+        except Exception:
+            try: up_conn.close()
+            except: pass
 
     return jsonify({
         "success": True,
