@@ -27,6 +27,7 @@ def load_simple_env(env_path):
                         os.environ[k] = v
 
 load_simple_env(os.path.join(BASE_DIR, ".env"))
+load_simple_env(os.path.join(BASE_DIR, "..", ".env"))
 _vod_port_configs = {
     "javtiful": "PORT_JAVTIFUL",
     "missav":   "PORT_MISSAV",
@@ -83,7 +84,7 @@ def resolve_db_path(source: str):
     return None
 
 def main():
-    nextdjav_db = os.environ.get("WINDOWS_NEXTDJAV_DB") if sys.platform == "win32" else os.environ.get("TERMUX_NEXTDJAV_DB")
+    nextdjav_db = os.environ.get("WINDOWS_DB_NEXTDJAV", os.environ.get("WINDOWS_NEXTDJAV_DB")) if sys.platform == "win32" else os.environ.get("TERMUX_DB_NEXTDJAV", os.environ.get("TERMUX_NEXTDJAV_DB"))
     
     print(f"==================================================")
     print(f" 🚀 KHỞI CHẠY HỆ THỐNG VOD CDN (NEXTDJAV-CDN)")

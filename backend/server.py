@@ -998,10 +998,16 @@ def get_videos():
                 cursor.execute(f"PRAGMA table_info({VIDEOS_TABLE})")
                 col_names = [col[1] for col in cursor.fetchall()]
                 
-                cond_parts = [
-                    "(v.details_fetched = 1 OR v.cover_fetched = 1)",
-                    f"(v.url IS NOT NULL AND v.url != '' AND v.url NOT LIKE '%{dummy_uuid}%' AND v.url != 'failed')"
-                ]
+                fetched_conds = []
+                if "details_fetched" in col_names:
+                    fetched_conds.append("v.details_fetched = 1")
+                if "cover_fetched" in col_names:
+                    fetched_conds.append("v.cover_fetched = 1")
+                
+                cond_parts = []
+                if fetched_conds:
+                    cond_parts.append(f"({' OR '.join(fetched_conds)})")
+                cond_parts.append(f"(v.url IS NOT NULL AND v.url != '' AND v.url NOT LIKE '%{dummy_uuid}%' AND v.url != 'failed')")
                 if "surrit_id" in col_names:
                     cond_parts.append("(v.surrit_id IS NOT NULL AND v.surrit_id != '' AND v.surrit_id NOT IN ('404', 'failed', 'no_surrit'))")
                 
@@ -2265,10 +2271,16 @@ def api_oneplayer_adjacent_video():
         cursor.execute(f"PRAGMA table_info({VIDEOS_TABLE})")
         col_names = [col[1] for col in cursor.fetchall()]
         
-        cond_parts = [
-            "(details_fetched = 1 OR cover_fetched = 1)",
-            f"(url IS NOT NULL AND url != '' AND url NOT LIKE '%{dummy_uuid}%' AND url != 'failed')"
-        ]
+        fetched_conds = []
+        if "details_fetched" in col_names:
+            fetched_conds.append("details_fetched = 1")
+        if "cover_fetched" in col_names:
+            fetched_conds.append("cover_fetched = 1")
+
+        cond_parts = []
+        if fetched_conds:
+            cond_parts.append(f"({' OR '.join(fetched_conds)})")
+        cond_parts.append(f"(url IS NOT NULL AND url != '' AND url NOT LIKE '%{dummy_uuid}%' AND url != 'failed')")
         if "surrit_id" in col_names:
             cond_parts.append("(surrit_id IS NOT NULL AND surrit_id != '' AND surrit_id NOT IN ('404', 'failed', 'no_surrit'))")
             
@@ -2458,7 +2470,15 @@ def api_oneplayer_history_view():
     if not items:
         with db_lock:
             cursor = db_conn_instance.cursor()
-            cursor.execute(f"SELECT id, title, cover, actress, genre, maker, dvd, release_date FROM {VIDEOS_TABLE} WHERE (details_fetched = 1 OR cover_fetched = 1) ORDER BY release_date DESC LIMIT ?", (limit,))
+            cursor.execute(f"PRAGMA table_info({VIDEOS_TABLE})")
+            fallback_cols = [col[1] for col in cursor.fetchall()]
+            fallback_filter = []
+            if "details_fetched" in fallback_cols:
+                fallback_filter.append("details_fetched = 1")
+            if "cover_fetched" in fallback_cols:
+                fallback_filter.append("cover_fetched = 1")
+            where_fallback = f"WHERE ({' OR '.join(fallback_filter)})" if fallback_filter else ""
+            cursor.execute(f"SELECT id, title, cover, actress, genre, maker, dvd, release_date FROM {VIDEOS_TABLE} {where_fallback} ORDER BY release_date DESC LIMIT ?", (limit,))
             for r in cursor.fetchall():
                 code = (r[6] or '').strip().upper() or r[0]
                 items.append({
