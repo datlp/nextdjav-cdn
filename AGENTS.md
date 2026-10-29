@@ -48,5 +48,5 @@ TẤT CẢ các Git commit message PHẢI ĐƯỢC VIẾT HOÀN TOÀN BẰNG **T
    - Luôn nạp file `.env` từ thư mục gốc cha `termux-services`.
 5. **Ngữ Cảnh Lịch Sử & Milestones (Context Storage)**:
    - Toàn bộ lịch sử phát triển, quyết định kiến trúc và bugfix của repo này được lưu tại:
-     `D:\Dat\Database\chat-history/nextdjav-cdn/history.db` (chế độ SQLite WAL).
+     `D:\Dat\Database\chat-history/nextdjav-cdn-history.db` (chế độ SQLite WAL).
    - Agent nạp context kỹ thuật từ bảng `milestones` với version active `v2.1-vault-and-mesh`.
