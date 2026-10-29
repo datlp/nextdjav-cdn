@@ -128,6 +128,21 @@ def main():
         print("[!] Không tìm thấy database nào để khởi chạy!")
         return
 
+    tunnels = []
+    if "--no-tunnel" not in sys.argv:
+        try:
+            parent_dir = os.path.dirname(BASE_DIR)
+            if parent_dir not in sys.path:
+                sys.path.insert(0, parent_dir)
+            from tunnel_manager import start_tunnel_background
+            for name, port, p, _ in processes:
+                svc_id = name.lower()
+                print(f"[*] 🌐 Kích hoạt Cloudflare Quick Tunnel cho {name} (:{port})...")
+                tun = start_tunnel_background(svc_id, port=port)
+                tunnels.append(tun)
+        except Exception as e:
+            print(f"[-] Không thể kích hoạt Cloudflare Tunnel: {e}")
+
     print("\n[+] Tất cả các server VOD đã sẵn sàng. Nhấn Ctrl+C để dừng.")
     
     try:
@@ -135,6 +150,11 @@ def main():
             time.sleep(1)
     except KeyboardInterrupt:
         print("\n[*] Đang dừng hệ thống CDN VOD...")
+        for tun in tunnels:
+            try:
+                tun.stop()
+            except Exception:
+                pass
         for name, port, p, _ in processes:
             p.terminate()
             p.wait()
