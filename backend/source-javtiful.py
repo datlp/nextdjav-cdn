@@ -177,15 +177,57 @@ class Scraper:
         try:
             res = self.session.get(url, timeout=15)
             mp4_url = None
-            match = re.search(r'<script[^>]*id=["\']frontWatchConfig["\'][^>]*>\s*(.*?)\s*</script>', res.text, re.DOTALL)
-            if match:
-                config = json.loads(match.group(1))
-                sources = config.get('playerSources', [])
-                if sources: mp4_url = sources[0]['src']
+
+            # 1. Cơ chế mới (2026+): script id="watch-config" với 2-step playback handshake
+            watch_cfg_match = re.search(r'<script[^>]*id=["']watch-config["'][^>]*>\s*(.*?)\s*</script>', res.text, re.DOTALL)
+            if not watch_cfg_match:
+                watch_cfg_match = re.search(r'<script[^>]*>\s*(\{[^<]*"playback"\s*:\s*\{[^<]*"ticket"[^<]*\})\s*</script>', res.text, re.DOTALL)
+                
+            if watch_cfg_match:
+                try:
+                    watch_cfg = json.loads(watch_cfg_match.group(1))
+                    playback = watch_cfg.get('playback', {})
+                    ticket = playback.get('ticket')
+                    endpoint = playback.get('endpoint')
+                    csrf_url_path = watch_cfg.get('csrfUrl', '/vi/csrf-token')
+
+                    if ticket and endpoint:
+                        csrf_url = f"https://{self.domain}{csrf_url_path}"
+                        csrf_res = self.session.get(csrf_url, headers={'Referer': url}, timeout=10)
+                        csrf_token = csrf_res.json().get('token') if csrf_res.status_code == 200 else ""
+
+                        pb_url = f"https://{self.domain}{endpoint}"
+                        pb_headers = {
+                            'Referer': url,
+                            'X-CSRF-TOKEN': csrf_token,
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Accept': 'application/json, text/plain, */*'
+                        }
+                        pb_res = self.session.post(pb_url, data={'ticket': ticket}, headers=pb_headers, timeout=10)
+                        if pb_res.status_code == 200:
+                            pb_data = pb_res.json()
+                            sources = pb_data.get('sources', [])
+                            if sources and sources[0].get('src'):
+                                mp4_url = sources[0]['src']
+                            elif pb_data.get('fallbackSrc'):
+                                mp4_url = pb_data.get('fallbackSrc')
+                except Exception as e_pb:
+                    custom_log(self.source_name, f"⚠️ Lỗi handshake watch-config: {e_pb}")
+
+            # 2. Cơ chế cũ (Legacy frontWatchConfig)
+            if not mp4_url:
+                match = re.search(r'<script[^>]*id=["']frontWatchConfig["'][^>]*>\s*(.*?)\s*</script>', res.text, re.DOTALL)
+                if match:
+                    config = json.loads(match.group(1))
+                    sources = config.get('playerSources', [])
+                    if sources: mp4_url = sources[0]['src']
+
+            # 3. Fallback video source tag
             if not mp4_url:
                 soup = BeautifulSoup(res.text, 'html.parser')
                 source = soup.select_one('video source')
                 if source and source.get('src'): mp4_url = source.get('src')
+
             if mp4_url:
                 # Fast-stream URL Javtiful có token hết hạn, lưu RAM cache 3 giờ
                 self.url_cache[vid_id] = (mp4_url, now_ts + 10800)

@@ -1408,6 +1408,10 @@ def proxy_video():
         ref = f"https://{getattr(scraper_instance, 'domain', 'vlxx.phd')}/"
     elif 'youtubepro.me' in parsed_target.netloc:
         ref = f"https://{getattr(scraper_instance, 'domain', 'sextop1.buzz')}/"
+    elif 'jav.si' in parsed_target.netloc or 'javtiful' in parsed_target.netloc:
+        ref = f"https://{getattr(scraper_instance, 'domain', 'javtiful.com')}/"
+    elif 'kho3dx.com' in parsed_target.netloc or '34xcas.com' in parsed_target.netloc or 'sextop1' in parsed_target.netloc:
+        ref = f"https://{getattr(scraper_instance, 'domain', 'sextop1.art')}/"
     headers = {
         "Referer": ref,
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
