@@ -312,37 +312,14 @@ def get_db_connection(db_path, limit_buffer='200M', source_module=None):
         except Exception as e:
             custom_log("System", f"⚠️ Bỏ qua tạo index do lỗi DB: {e}")
 
+        # V2.0 Canonical Architecture: Dọn dẹp FTS và triggers cũ nếu còn sót lại để tương thích SQLite View
         try:
-            cursor.execute(f"PRAGMA table_info({VIDEOS_TABLE}_fts)")
-            fts_cols = [row[1] for row in cursor.fetchall()]
-            if 'dvd' not in fts_cols:
-                cursor.execute(f"DROP TABLE IF EXISTS {VIDEOS_TABLE}_fts")
-                cursor.execute(f"DROP TRIGGER IF EXISTS {VIDEOS_TABLE}_ai")
-                cursor.execute(f"DROP TRIGGER IF EXISTS {VIDEOS_TABLE}_ad")
-                cursor.execute(f"DROP TRIGGER IF EXISTS {VIDEOS_TABLE}_au")
-
-            conn.execute(f'''
-                CREATE VIRTUAL TABLE IF NOT EXISTS {VIDEOS_TABLE}_fts USING fts5(
-                    title, actress, genre, maker, details, dvd,
-                    content='{VIDEOS_TABLE}', content_rowid='rowid'
-                )
-            ''')
-            for trigger_sql in [
-                f"CREATE TRIGGER IF NOT EXISTS {VIDEOS_TABLE}_ai AFTER INSERT ON {VIDEOS_TABLE} BEGIN INSERT INTO {VIDEOS_TABLE}_fts(rowid, title, actress, genre, maker, details, dvd) VALUES (new.rowid, new.title, new.actress, new.genre, new.maker, new.details, new.dvd); END;",
-                f"CREATE TRIGGER IF NOT EXISTS {VIDEOS_TABLE}_ad AFTER DELETE ON {VIDEOS_TABLE} BEGIN INSERT INTO {VIDEOS_TABLE}_fts({VIDEOS_TABLE}_fts, rowid, title, actress, genre, maker, details, dvd) VALUES ('delete', old.rowid, old.title, old.actress, old.genre, old.maker, old.details, old.dvd); END;",
-                f"CREATE TRIGGER IF NOT EXISTS {VIDEOS_TABLE}_au AFTER UPDATE ON {VIDEOS_TABLE} BEGIN INSERT INTO {VIDEOS_TABLE}_fts({VIDEOS_TABLE}_fts, rowid, title, actress, genre, maker, details, dvd) VALUES ('delete', old.rowid, old.title, old.actress, old.genre, old.maker, old.details, old.dvd); INSERT INTO {VIDEOS_TABLE}_fts(rowid, title, actress, genre, maker, details, dvd) VALUES (new.rowid, new.title, new.actress, new.genre, new.maker, new.details, new.dvd); END;"
-            ]:
-                conn.execute(trigger_sql)
-                
-            cursor.execute(f"SELECT COUNT(*) FROM {VIDEOS_TABLE}_fts")
-            if cursor.fetchone()[0] == 0:
-                custom_log("System", "⏳ Backfilling FTS index...")
-                cursor.execute(f'''
-                    INSERT INTO {VIDEOS_TABLE}_fts(rowid, title, actress, genre, maker, details, dvd)
-                    SELECT rowid, title, actress, genre, maker, details, dvd FROM {VIDEOS_TABLE}
-                ''')
-        except Exception as e:
-            custom_log("System", f"⚠️ Bỏ qua FTS setup do lỗi DB: {e}")
+            cursor.execute(f"DROP TRIGGER IF EXISTS {VIDEOS_TABLE}_ai")
+            cursor.execute(f"DROP TRIGGER IF EXISTS {VIDEOS_TABLE}_ad")
+            cursor.execute(f"DROP TRIGGER IF EXISTS {VIDEOS_TABLE}_au")
+            cursor.execute(f"DROP TABLE IF EXISTS {VIDEOS_TABLE}_fts")
+        except Exception:
+            pass
 
     conn.execute('''
         CREATE TABLE IF NOT EXISTS configs (
@@ -561,7 +538,8 @@ def rebuild_tags_fts(db_conn):
         cursor.execute("DROP TABLE IF EXISTS tags_fts")
         
         cursor.execute("CREATE TABLE tags_summary (keyword TEXT, type TEXT, count INTEGER)")
-        cursor.execute("CREATE VIRTUAL TABLE tags_fts USING fts5(keyword, type UNINDEXED, count UNINDEXED, content='tags_summary', content_rowid='rowid')")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_tags_summary_type_count ON tags_summary(type, count DESC)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_tags_summary_kw ON tags_summary(keyword)")
         
         data = []
         for k, c in actress_counts.items(): data.append((k, 'actress', c))
@@ -569,13 +547,12 @@ def rebuild_tags_fts(db_conn):
         for k, c in maker_counts.items(): data.append((k, 'maker', c))
         
         cursor.executemany("INSERT INTO tags_summary (keyword, type, count) VALUES (?, ?, ?)", data)
-        cursor.execute("INSERT INTO tags_fts(tags_fts) VALUES('rebuild')")
         db_conn.commit()
         global tags_cache
         tags_cache = []
         custom_log("System", "✔️ Hoàn tất tổng hợp tags.")
     except Exception as e:
-        custom_log("System", f"⚠️ Bỏ qua rebuild_tags_fts do SQLite không hỗ trợ FTS5 hoặc lỗi: {e}")
+        custom_log("System", f"⚠️ Bỏ qua rebuild_tags_fts do lỗi: {e}")
 
 class BackgroundScanner(threading.Thread):
     def __init__(self, scraper, upgrade_all=False, news_threads=0, detail_threads=0, videos_threads=0):
@@ -869,31 +846,31 @@ def get_counts():
                 from_main = f"{VIDEOS_TABLE} v"
                 
                 if search_key:
-                    match_field = re.match(r'^(actress|genre|maker|title|dvd)\s*:\s*(.*)$', search_key, re.IGNORECASE)
+                    match_field = re.match(r'^(actress|genre|maker|studio|title|dvd)\s*:\s*(.*)$', search_key, re.IGNORECASE)
                     if match_field:
                         field = match_field.group(1).lower()
+                        if field == 'studio':
+                            field = 'maker'
                         val = match_field.group(2).strip()
                         raw_parts = [p.strip() for p in val.split(',') if p.strip()]
-                        field_terms = []
+                        field_conds = []
                         for part in raw_parts:
-                            safe_val = ' '.join([f'"{w}"*' for w in part.replace('"', '').split()])
-                            if safe_val:
-                                field_terms.append(f"{field} : ({safe_val})")
-                        if field_terms:
-                            from_main = f"{VIDEOS_TABLE}_fts JOIN {VIDEOS_TABLE} v ON v.rowid = {VIDEOS_TABLE}_fts.rowid"
-                            search_where_v = f"{VIDEOS_TABLE}_fts MATCH ?"
-                            search_params.append(' OR '.join(field_terms))
+                            if field == 'dvd':
+                                field_conds.append("(v.dvd LIKE ? OR v.id LIKE ?)")
+                                search_params.extend([f"%{part}%", f"%{part}%"])
+                            else:
+                                field_conds.append(f"v.{field} LIKE ?")
+                                search_params.append(f"%{part}%")
+                        if field_conds:
+                            search_where_v = f"({' OR '.join(field_conds)})"
                     else:
-                        raw_parts = [p.strip() for p in search_key.split(',') if p.strip()]
-                        key_terms = []
+                        raw_parts = [p.strip() for p in search_key.replace(',', ' ').split() if p.strip()]
+                        key_conds = []
                         for part in raw_parts:
-                            safe_k = ' '.join([f'"{w}"*' for w in part.replace('"', '').split()])
-                            if safe_k:
-                                key_terms.append(f"({safe_k})")
-                        if key_terms:
-                            from_main = f"{VIDEOS_TABLE}_fts JOIN {VIDEOS_TABLE} v ON v.rowid = {VIDEOS_TABLE}_fts.rowid"
-                            search_where_v = f"{VIDEOS_TABLE}_fts MATCH ?"
-                            search_params.append(' OR '.join(key_terms))
+                            key_conds.append("(v.dvd LIKE ? OR v.id LIKE ? OR v.title LIKE ? OR v.actress LIKE ? OR v.genre LIKE ? OR v.maker LIKE ?)")
+                            search_params.extend([f"%{part}%"] * 6)
+                        if key_conds:
+                            search_where_v = f"({' AND '.join(key_conds)})" 
         
                 where_all = ("WHERE " + search_where_v) if search_where_v else ""
                 cursor.execute(f"SELECT COUNT(*) FROM {from_main} {where_all}", search_params)
@@ -927,23 +904,22 @@ def get_counts():
                     related_row = cursor.fetchone()
                     if related_row:
                         r_title, r_actress, r_genre, r_maker = related_row
-                        r_keywords = extract_clean_keywords_viet_eng(r_title) if r_title else []
                         r_query_parts = []
+                        r_params = [related_vid_id]
                         if r_actress:
-                            r_actresses = [a.strip() for a in r_actress.split(',')]
-                            r_query_parts.append(' OR '.join([f'actress : "{a}"' for a in r_actresses if a]))
+                            for a in [a.strip() for a in r_actress.split(',') if a.strip()]:
+                                r_query_parts.append("v.actress LIKE ?")
+                                r_params.append(f"%{a}%")
                         if r_genre:
-                            r_genres = [g.strip() for g in r_genre.split(',')]
-                            r_query_parts.append(' OR '.join([f'genre : "{g}"' for g in r_genres if g]))
+                            for g in [g.strip() for g in r_genre.split(',') if g.strip()]:
+                                r_query_parts.append("v.genre LIKE ?")
+                                r_params.append(f"%{g}%")
                         if r_maker:
-                            r_query_parts.append(f'maker : "{r_maker}"')
-                        if r_keywords:
-                            r_kw_str = ' OR '.join([f'"{k}"*' for k in r_keywords[:5]])
-                            r_query_parts.append(f'title : ({r_kw_str})')
+                            r_query_parts.append("v.maker LIKE ?")
+                            r_params.append(f"%{r_maker.strip()}%")
                         
-                        r_fts_query = ' OR '.join([p for p in r_query_parts if p])
-                        if r_fts_query:
-                            cursor.execute(f"SELECT COUNT(*) FROM {VIDEOS_TABLE}_fts JOIN {VIDEOS_TABLE} v ON v.rowid = {VIDEOS_TABLE}_fts.rowid WHERE {VIDEOS_TABLE}_fts MATCH ? AND v.id != ?", (r_fts_query, related_vid_id))
+                        if r_query_parts:
+                            cursor.execute(f"SELECT COUNT(*) FROM {VIDEOS_TABLE} v WHERE v.id != ? AND ({' OR '.join(r_query_parts)})", r_params)
                             count_related = cursor.fetchone()[0]
         
         return jsonify({
@@ -1043,8 +1019,6 @@ def get_videos():
                     from_clause = f"{VIDEOS_TABLE} v JOIN (SELECT video_id, COUNT(*) as c FROM history_logs WHERE watched_at > ? GROUP BY video_id) h ON v.id = h.video_id"
                     params.append(month_ago)
         
-                fts_terms = []
-                
                 if tab == 'related':
                     related_vid_id = request.args.get('video_id', '').strip()
                     if not related_vid_id and identifier:
@@ -1063,64 +1037,56 @@ def get_videos():
                         
                     title, actress, genre, maker = row
                     
-                    keywords = extract_clean_keywords_viet_eng(title) if title else []
-                    query_parts = []
+                    rel_parts = []
                     if actress:
-                        actresses = [a.strip() for a in actress.split(',')]
-                        query_parts.append(' OR '.join([f'actress : "{a}"' for a in actresses if a]))
+                        for a in [a.strip() for a in actress.split(',') if a.strip()]:
+                            rel_parts.append("v.actress LIKE ?")
+                            params.append(f"%{a}%")
                     if genre:
-                        genres = [g.strip() for g in genre.split(',')]
-                        query_parts.append(' OR '.join([f'genre : "{g}"' for g in genres if g]))
+                        for g in [g.strip() for g in genre.split(',') if g.strip()]:
+                            rel_parts.append("v.genre LIKE ?")
+                            params.append(f"%{g}%")
                     if maker:
-                        query_parts.append(f'maker : "{maker}"')
-                    if keywords:
-                        kw_str = ' OR '.join([f'"{k}"*' for k in keywords[:5]])
-                        query_parts.append(f'title : ({kw_str})')
+                        rel_parts.append("v.maker LIKE ?")
+                        params.append(f"%{maker.strip()}%")
                         
-                    fts_query = ' OR '.join([p for p in query_parts if p])
-                    if not fts_query:
+                    if not rel_parts:
                         return jsonify({"items": [], "total": 0, "page": page})
                     
-                    fts_terms.append(f"({fts_query})")
+                    where_clauses.append(f"({' OR '.join(rel_parts)})")
                     where_clauses.append("v.id != ?")
                     params.append(related_vid_id)
         
-                safe_key = ""
                 # Xử lý các bộ lọc thực thể độc lập (actress, genre, maker/studio)
                 if actress_param:
                     act_parts = [p.strip() for p in actress_param.split(',') if p.strip()]
-                    act_terms = []
+                    act_conds = []
                     for part in act_parts:
-                        safe_val = ' '.join([f'"{w}"*' for w in part.replace('"', '').split()])
-                        if safe_val:
-                            act_terms.append(f'actress : ({safe_val})')
-                    if act_terms:
-                        fts_terms.append(f"({' OR '.join(act_terms)})")
-                        safe_key = "actress"
+                        act_conds.append("v.actress LIKE ?")
+                        params.append(f"%{part}%")
+                    if act_conds:
+                        where_clauses.append(f"({' OR '.join(act_conds)})")
 
                 if genre_param:
                     gen_parts = [p.strip() for p in genre_param.split(',') if p.strip()]
-                    gen_terms = []
+                    gen_conds = []
                     for part in gen_parts:
-                        safe_val = ' '.join([f'"{w}"*' for w in part.replace('"', '').split()])
-                        if safe_val:
-                            gen_terms.append(f'genre : ({safe_val})')
-                    if gen_terms:
-                        fts_terms.append(f"({' OR '.join(gen_terms)})")
-                        safe_key = "genre"
+                        gen_conds.append("v.genre LIKE ?")
+                        params.append(f"%{part}%")
+                    if gen_conds:
+                        where_clauses.append(f"({' OR '.join(gen_conds)})")
 
                 if studio_param:
                     st_parts = [p.strip() for p in studio_param.split(',') if p.strip()]
-                    st_terms = []
+                    st_conds = []
                     for part in st_parts:
-                        safe_val = ' '.join([f'"{w}"*' for w in part.replace('"', '').split()])
-                        if safe_val:
-                            st_terms.append(f'maker : ({safe_val})')
-                    if st_terms:
-                        fts_terms.append(f"({' OR '.join(st_terms)})")
-                        safe_key = "maker"
+                        st_conds.append("v.maker LIKE ?")
+                        params.append(f"%{part}%")
+                    if st_conds:
+                        where_clauses.append(f"({' OR '.join(st_conds)})")
 
                 # Xử lý từ khóa tìm kiếm tự do (search_key hoặc q)
+                search_dvd_keyword = None
                 if search_key:
                     match_field = re.match(r'^(actress|genre|maker|studio|title|dvd)\s*:\s*(.*)$', search_key, re.IGNORECASE)
                     if match_field:
@@ -1129,33 +1095,24 @@ def get_videos():
                             field = 'maker'
                         val = match_field.group(2).strip()
                         raw_parts = [p.strip() for p in val.split(',') if p.strip()]
-                        field_terms = []
+                        field_conds = []
                         for part in raw_parts:
-                            safe_val = ' '.join([f'"{w}"*' for w in part.replace('"', '').split()])
-                            if safe_val:
-                                field_terms.append(f"{field} : ({safe_val})")
-                        if field_terms:
-                            fts_or_clause = ' OR '.join(field_terms)
-                            fts_terms.append(f"({fts_or_clause})")
-                            safe_key = fts_or_clause
+                            if field == 'dvd':
+                                field_conds.append("(v.dvd LIKE ? OR v.id LIKE ?)")
+                                params.extend([f"%{part}%", f"%{part}%"])
+                                search_dvd_keyword = part
+                            else:
+                                field_conds.append(f"v.{field} LIKE ?")
+                                params.append(f"%{part}%")
+                        if field_conds:
+                            where_clauses.append(f"({' OR '.join(field_conds)})")
                     else:
-                        # Từ khóa chung: tìm kiếm theo cụm hoặc theo từ
-                        raw_parts = [p.strip() for p in search_key.split(',') if p.strip()]
-                        key_terms = []
-                        for part in raw_parts:
-                            words = [w for w in part.replace('"', '').split() if w]
-                            if words:
-                                safe_k = ' '.join([f'"{w}"*' for w in words])
-                                key_terms.append(f"({safe_k})")
-                        if key_terms:
-                            fts_or_clause = ' OR '.join(key_terms)
-                            fts_terms.append(f"({fts_or_clause})")
-                            safe_key = fts_or_clause
-                            
-                if fts_terms:
-                    from_clause += f" JOIN {VIDEOS_TABLE}_fts ON v.rowid = {VIDEOS_TABLE}_fts.rowid"
-                    where_clauses.append(f"{VIDEOS_TABLE}_fts MATCH ?")
-                    params.append(" AND ".join(fts_terms))
+                        words = [w for w in search_key.replace(',', ' ').split() if w]
+                        for w in words:
+                            where_clauses.append("(v.dvd LIKE ? OR v.id LIKE ? OR v.title LIKE ? OR v.actress LIKE ? OR v.genre LIKE ? OR v.maker LIKE ?)")
+                            params.extend([f"%{w}%"] * 6)
+                        if words:
+                            search_dvd_keyword = words[0]
                         
                 where_sql = "WHERE " + " AND ".join(where_clauses) if where_clauses else ""
                 
@@ -1166,6 +1123,7 @@ def get_videos():
                     cursor.execute(f"SELECT COUNT(*) FROM {from_clause} {where_sql}", params)
                     total = cursor.fetchone()[0]
                     
+                order_params = []
                 if tab == 'favorites':
                     order_clause = "ORDER BY v.release_date DESC, f.added_at DESC"
                 elif tab == 'recent':
@@ -1176,15 +1134,15 @@ def get_videos():
                     order_clause = "ORDER BY h.total_watches DESC, v.release_date DESC"
                 elif tab in ['trending_day', 'trending_month']:
                     order_clause = "ORDER BY h.c DESC, v.release_date DESC"
-                elif tab == 'related':
-                    order_clause = f"ORDER BY bm25({VIDEOS_TABLE}_fts, 5.0, 10.0, 2.0, 1.0, 0.5) ASC, v.release_date DESC, v.added_at DESC"
-                elif safe_key:
-                    order_clause = f"ORDER BY v.release_date DESC, bm25({VIDEOS_TABLE}_fts, 5.0, 10.0, 2.0, 1.0, 0.5) ASC, v.added_at DESC"
+                elif search_dvd_keyword:
+                    # Ưu tiên mã DVD khớp chính xác hoặc khớp tiền tố trước
+                    order_clause = "ORDER BY CASE WHEN upper(v.dvd) = upper(?) THEN 1 WHEN upper(v.dvd) LIKE upper(?) THEN 2 ELSE 3 END, v.release_date DESC, v.added_at DESC"
+                    order_params = [search_dvd_keyword, f"{search_dvd_keyword}%"]
                 else:
                     order_clause = "ORDER BY v.release_date DESC, v.added_at DESC"
                     
                 query = f"SELECT v.id, v.title, v.cover, v.url, v.release_date, v.actress, v.genre, v.maker, v.details, v.dvd FROM {from_clause} {where_sql} {order_clause} LIMIT ? OFFSET ?"
-                cursor.execute(query, params + [per_page, offset])
+                cursor.execute(query, params + order_params + [per_page, offset])
 
                 rows = cursor.fetchall()
                 
@@ -1287,33 +1245,31 @@ def get_related():
                     keywords = extract_clean_keywords_bulletproof(title) if title else []
                         
                 query_parts = []
+                rel_conds = []
+                rel_params = [vid_id]
                 if actress:
-                    actresses = [a.strip() for a in actress.split(',')]
-                    query_parts.append(' OR '.join([f'actress : "{a}"' for a in actresses if a]))
+                    for a in [a.strip() for a in actress.split(',') if a.strip()]:
+                        rel_conds.append("v.actress LIKE ?")
+                        rel_params.append(f"%{a}%")
                 if genre:
-                    genres = [g.strip() for g in genre.split(',')]
-                    query_parts.append(' OR '.join([f'genre : "{g}"' for g in genres if g]))
+                    for g in [g.strip() for g in genre.split(',') if g.strip()]:
+                        rel_conds.append("v.genre LIKE ?")
+                        rel_params.append(f"%{g}%")
                 if maker:
-                    query_parts.append(f'maker : "{maker}"')
+                    rel_conds.append("v.maker LIKE ?")
+                    rel_params.append(f"%{maker.strip()}%")
                     
-                if keywords:
-                    kw_str = ' OR '.join([f'"{k}"*' for k in keywords[:5]])
-                    query_parts.append(f'title : ({kw_str})')
-                    
-                fts_query = ' OR '.join([p for p in query_parts if p])
-                
-                if not fts_query:
+                if not rel_conds:
                     return jsonify({"items": []})
                     
                 sql = f'''
                     SELECT v.id, v.title, v.cover, v.url, v.release_date, v.actress, v.genre, v.maker, v.details, v.dvd
-                    FROM {VIDEOS_TABLE}_fts
-                    JOIN {VIDEOS_TABLE} v ON v.rowid = {VIDEOS_TABLE}_fts.rowid
-                    WHERE {VIDEOS_TABLE}_fts MATCH ? AND v.id != ?
-                    ORDER BY bm25({VIDEOS_TABLE}_fts, 5.0, 10.0, 2.0, 1.0, 0.5) ASC, v.release_date DESC
+                    FROM {VIDEOS_TABLE} v
+                    WHERE v.id != ? AND ({' OR '.join(rel_conds)})
+                    ORDER BY v.release_date DESC, v.added_at DESC
                     LIMIT 12
                 '''
-                cursor.execute(sql, (fts_query, vid_id))
+                cursor.execute(sql, rel_params)
                 rows = cursor.fetchall()
                 
         videos = []
@@ -1850,22 +1806,8 @@ def search_suggestions():
                         for r in cursor.fetchall():
                             suggestions.append({"text": r[0], "type": tab})
                     else:
-                        words = q.replace('"', '').split()
-                        if not words:
-                            return jsonify({"success": True, "suggestions": suggestions})
-                        safe_key_and = ' AND '.join([f'"{w}"*' for w in words])
-                        try:
-                            cursor.execute('''
-                                SELECT keyword
-                                FROM tags_fts
-                                WHERE tags_fts MATCH ? AND type=?
-                                ORDER BY count DESC
-                                LIMIT ? OFFSET ?
-                            ''', (safe_key_and, tab, per_page, offset))
-                            tag_rows = cursor.fetchall()
-                        except Exception as e:
-                            custom_log("System", f"❌ FTS tags search error: {e}")
-                            tag_rows = []
+                        cursor.execute("SELECT keyword FROM tags_summary WHERE type=? AND keyword LIKE ? ORDER BY count DESC LIMIT ? OFFSET ?", (tab, f"%{q}%", per_page, offset))
+                        tag_rows = cursor.fetchall()
 
                         if len(tag_rows) < 15 and page == 1:
                             load_tags_cache_if_needed(cursor)
@@ -1946,35 +1888,10 @@ def search_suggestions():
                     return jsonify({"success": True, "suggestions": suggestions})
                 
                 else:
-                    raw_parts = [p.strip() for p in q.split(',') if p.strip()]
-                    or_parts = []
-                    and_parts = []
-                    for part in raw_parts:
-                        w_list = part.replace('"', '').split()
-                        if w_list:
-                            and_parts.append('(' + ' AND '.join([f'"{w}"*' for w in w_list]) + ')')
-                            or_parts.append('(' + ' OR '.join([f'"{w}"*' for w in w_list]) + ')')
-                    
-                    if not or_parts:
-                        return jsonify({"success": True, "suggestions": suggestions})
+                    cursor.execute("SELECT keyword, type, count FROM tags_summary WHERE keyword LIKE ? ORDER BY count DESC LIMIT 30", (f"%{q}%",))
+                    tag_rows = cursor.fetchall()
                         
-                    safe_key_and = ' OR '.join(and_parts)
-                    safe_key_or = ' OR '.join(or_parts)
-                    
-                    try:
-                        cursor.execute('''
-                            SELECT keyword, type, count
-                            FROM tags_fts
-                            WHERE tags_fts MATCH ?
-                            ORDER BY count DESC
-                            LIMIT 30
-                        ''', (safe_key_and,))
-                        tag_rows = cursor.fetchall()
-                    except Exception as e:
-                        custom_log("System", f"❌ FTS tags search error: {e}")
-                        tag_rows = []
-                        
-                    # Fuzzy Search (Tìm kiếm mờ) bổ sung nếu FTS không trả về đủ kết quả
+                    # Fuzzy Search (Tìm kiếm mờ) bổ sung nếu tags không trả về đủ kết quả
                     if len(tag_rows) < 15:
                         load_tags_cache_if_needed(cursor)
                         seen_tags = set([r[0] for r in tag_rows])
@@ -2017,37 +1934,41 @@ def search_suggestions():
                     match_watch_history = []
                     if identifier:
                         try:
-                            if safe_key_or:
-                                cursor.execute(f'''
-                                    SELECT v.title, v.id, v.cover
-                                    FROM {VIDEOS_TABLE}_fts fts
-                                    JOIN {VIDEOS_TABLE} v ON v.rowid = fts.rowid
-                                    JOIN history h ON h.video_id = v.id
-                                    WHERE h.username = ? AND fts.{VIDEOS_TABLE}_fts MATCH ?
-                                    ORDER BY bm25(fts, 5.0, 10.0, 2.0, 1.0, 0.5) ASC, h.last_watched DESC
-                                    LIMIT 5
-                                ''', (identifier, f"({safe_key_or})"))
-                                for row in cursor.fetchall():
-                                    t = row[0].strip()
-                                    if t:
-                                        match_watch_history.append({
-                                            "text": t[:80] + ("..." if len(t)>80 else ""),
-                                            "type": "watch_history",
-                                            "id": row[1],
-                                            "cover": f"/api/media?id={row[1]}"
-                                        })
+                            cursor.execute(f'''
+                                SELECT v.title, v.id, v.cover
+                                FROM history h
+                                JOIN {VIDEOS_TABLE} v ON h.video_id = v.id
+                                WHERE h.username = ? AND (v.title LIKE ? OR v.id LIKE ? OR v.dvd LIKE ?)
+                                ORDER BY h.last_watched DESC
+                                LIMIT 5
+                            ''', (identifier, f"%{q}%", f"%{q}%", f"%{q}%"))
+                            for row in cursor.fetchall():
+                                t = row[0].strip()
+                                if t:
+                                    match_watch_history.append({
+                                        "text": t[:80] + ("..." if len(t)>80 else ""),
+                                        "type": "watch_history",
+                                        "id": row[1],
+                                        "cover": f"/api/media?id={row[1]}"
+                                    })
                         except Exception as e:
-                            custom_log("System", f"❌ Lỗi FTS lịch sử xem: {e}")
+                            custom_log("System", f"❌ Lỗi gợi ý lịch sử xem: {e}")
                         
                     match_title = []
                     try:
                         cursor.execute(f'''
                             SELECT v.title, v.id, v.cover
-                            FROM {VIDEOS_TABLE}_fts
-                            JOIN {VIDEOS_TABLE} v ON v.rowid = {VIDEOS_TABLE}_fts.rowid
-                            WHERE {VIDEOS_TABLE}_fts MATCH ?
-                            ORDER BY bm25({VIDEOS_TABLE}_fts, 5.0, 10.0, 2.0, 1.0, 0.5) ASC LIMIT 10
-                        ''', (f"title : ({safe_key_or})",))
+                            FROM {VIDEOS_TABLE} v
+                            WHERE v.title LIKE ? OR v.id LIKE ? OR v.dvd LIKE ?
+                            ORDER BY 
+                              CASE 
+                                WHEN upper(v.dvd) = upper(?) THEN 1 
+                                WHEN upper(v.dvd) LIKE upper(?) THEN 2 
+                                ELSE 3 
+                              END, 
+                              v.release_date DESC 
+                            LIMIT 10
+                        ''', (f"%{q}%", f"%{q}%", f"%{q}%", q, f"%{q}%"))
                         for row in cursor.fetchall():
                             t = row[0].strip()
                             if t:
@@ -2058,7 +1979,7 @@ def search_suggestions():
                                     "cover": f"/api/media?id={row[1]}"
                                 })
                     except Exception as e:
-                        custom_log("System", f"❌ FTS title search error: {e}")
+                        custom_log("System", f"❌ Gợi ý title search error: {e}")
                         
                     history_ids = {item['id'] for item in match_watch_history}
                     unique_match_title = [item for item in match_title if item['id'] not in history_ids]
@@ -2286,30 +2207,30 @@ def api_oneplayer_adjacent_video():
             
         crawled_cond = f"({' OR '.join(cond_parts)})"
 
-        # Tìm rowid và release_date hiện tại
-        cursor.execute(f"SELECT rowid, id, dvd, title, cover, url, release_date FROM {VIDEOS_TABLE} WHERE upper(dvd) = ? OR upper(id) = ? OR upper(title) LIKE ? LIMIT 1", (code, code.lower(), f"%{code}%"))
+        # Tìm id và release_date hiện tại (thay thế rowid để tương thích SQLite View)
+        cursor.execute(f"SELECT id, dvd, title, cover, url, release_date FROM {VIDEOS_TABLE} WHERE upper(dvd) = ? OR upper(id) = ? OR upper(title) LIKE ? LIMIT 1", (code, code.lower(), f"%{code}%"))
         cur_row = cursor.fetchone()
 
         adj = None
         if cur_row:
-            cur_rowid = cur_row[0]
-            cur_rel = cur_row[6] or ""
-            # Khớp theo thứ tự sắp xếp của Explorer (mặc định release_date DESC, rowid DESC)
+            cur_id = cur_row[0]
+            cur_rel = cur_row[5] or ""
+            # Khớp theo thứ tự sắp xếp của Explorer (mặc định release_date DESC, id DESC)
             if direction == "next":
                 if sort_asc:
-                    cursor.execute(f"SELECT id, dvd, title, cover, url, release_date FROM {VIDEOS_TABLE} WHERE {crawled_cond} AND (release_date > ? OR (release_date = ? AND rowid > ?)) ORDER BY release_date ASC, rowid ASC LIMIT 1", (cur_rel, cur_rel, cur_rowid))
+                    cursor.execute(f"SELECT id, dvd, title, cover, url, release_date FROM {VIDEOS_TABLE} WHERE {crawled_cond} AND (release_date > ? OR (release_date = ? AND id > ?)) ORDER BY release_date ASC, id ASC LIMIT 1", (cur_rel, cur_rel, cur_id))
                 else:
-                    cursor.execute(f"SELECT id, dvd, title, cover, url, release_date FROM {VIDEOS_TABLE} WHERE {crawled_cond} AND (release_date < ? OR (release_date = ? AND rowid < ?)) ORDER BY release_date DESC, rowid DESC LIMIT 1", (cur_rel, cur_rel, cur_rowid))
+                    cursor.execute(f"SELECT id, dvd, title, cover, url, release_date FROM {VIDEOS_TABLE} WHERE {crawled_cond} AND (release_date < ? OR (release_date = ? AND id < ?)) ORDER BY release_date DESC, id DESC LIMIT 1", (cur_rel, cur_rel, cur_id))
                 adj = cursor.fetchone()
             else:
                 if sort_asc:
-                    cursor.execute(f"SELECT id, dvd, title, cover, url, release_date FROM {VIDEOS_TABLE} WHERE {crawled_cond} AND (release_date < ? OR (release_date = ? AND rowid < ?)) ORDER BY release_date DESC, rowid DESC LIMIT 1", (cur_rel, cur_rel, cur_rowid))
+                    cursor.execute(f"SELECT id, dvd, title, cover, url, release_date FROM {VIDEOS_TABLE} WHERE {crawled_cond} AND (release_date < ? OR (release_date = ? AND id < ?)) ORDER BY release_date DESC, id DESC LIMIT 1", (cur_rel, cur_rel, cur_id))
                 else:
-                    cursor.execute(f"SELECT id, dvd, title, cover, url, release_date FROM {VIDEOS_TABLE} WHERE {crawled_cond} AND (release_date > ? OR (release_date = ? AND rowid > ?)) ORDER BY release_date ASC, rowid ASC LIMIT 1", (cur_rel, cur_rel, cur_rowid))
+                    cursor.execute(f"SELECT id, dvd, title, cover, url, release_date FROM {VIDEOS_TABLE} WHERE {crawled_cond} AND (release_date > ? OR (release_date = ? AND id > ?)) ORDER BY release_date ASC, id ASC LIMIT 1", (cur_rel, cur_rel, cur_id))
                 adj = cursor.fetchone()
 
         if not adj:
-            order_clause = "ORDER BY release_date DESC, rowid DESC" if not sort_asc else "ORDER BY release_date ASC, rowid ASC"
+            order_clause = "ORDER BY release_date DESC, id DESC" if not sort_asc else "ORDER BY release_date ASC, id ASC"
             cursor.execute(f"SELECT id, dvd, title, cover, url, release_date FROM {VIDEOS_TABLE} WHERE {crawled_cond} {order_clause} LIMIT 1")
             adj = cursor.fetchone()
 
