@@ -179,7 +179,7 @@ class Scraper:
             mp4_url = None
 
             # 1. Cơ chế mới (2026+): script id="watch-config" với 2-step playback handshake
-            watch_cfg_match = re.search(r'<script[^>]*id=["']watch-config["'][^>]*>\s*(.*?)\s*</script>', res.text, re.DOTALL)
+            watch_cfg_match = re.search(r"""<script[^>]*id=["']watch-config["'][^>]*>\s*(.*?)\s*</script>""", res.text, re.DOTALL)
             if not watch_cfg_match:
                 watch_cfg_match = re.search(r'<script[^>]*>\s*(\{[^<]*"playback"\s*:\s*\{[^<]*"ticket"[^<]*\})\s*</script>', res.text, re.DOTALL)
                 
@@ -216,7 +216,7 @@ class Scraper:
 
             # 2. Cơ chế cũ (Legacy frontWatchConfig)
             if not mp4_url:
-                match = re.search(r'<script[^>]*id=["']frontWatchConfig["'][^>]*>\s*(.*?)\s*</script>', res.text, re.DOTALL)
+                match = re.search(r"""<script[^>]*id=["']frontWatchConfig["'][^>]*>\s*(.*?)\s*</script>""", res.text, re.DOTALL)
                 if match:
                     config = json.loads(match.group(1))
                     sources = config.get('playerSources', [])

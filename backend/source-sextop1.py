@@ -364,8 +364,8 @@ class Scraper:
             try:
                 emb_res = self.session.get(iframe_src, headers={'Referer': target_url}, timeout=10)
                 if emb_res.status_code == 200:
-                    jw_file_match = re.search(r'file:\s*['"](https?://[^'"]+)['"]', emb_res.text)
-                    jw_key_match = re.search(r'key:\s*['"]([^'"]+)['"]', emb_res.text) or re.search(r'jwplayer\.key\s*=\s*['"]([^'"]+)['"]', emb_res.text)
+                    jw_file_match = re.search(r"""file:\s*['"](https?://[^'"]+)['"]""", emb_res.text)
+                    jw_key_match = re.search(r"""key:\s*['"]([^'"]+)['"]""", emb_res.text) or re.search(r"""jwplayer\.key\s*=\s*['"]([^'"]+)['"]""", emb_res.text)
                     if jw_file_match:
                         raw_stream = jw_file_match.group(1)
                         jw_key = jw_key_match.group(1) if jw_key_match else ""
@@ -382,7 +382,7 @@ class Scraper:
                 custom_log(self.source_name, f"⚠️ Lỗi bóc tách iframe embed: {e_emb}")
 
         # 2. Bóc tách qua API ajax legacy
-        id_match = re.search(r'postid-(\d+)', html_text) or re.search(r'var postid\s*=\s*'(\d+)'', html_text)
+        id_match = re.search(r"postid-(\d+)", html_text) or re.search(r"var postid\s*=\s*'(\d+)'", html_text)
         if id_match:
             movie_id = id_match.group(1)
             servers_to_try = [1, 2, 3, 4]
@@ -415,11 +415,11 @@ class Scraper:
                         res_api = self.session.get(api_url, headers=headers, timeout=15)
                         if res_api.status_code == 200:
                             data_html = res_api.json().get("data", "")
-                            m3u8_match = re.search(r"file:\s*['"]([^'"]+\.m3u8[^'"]*)['"]", data_html) or                                          re.search(r"file:\s*['"]([^'"]+)['"]", data_html)
+                            m3u8_match = re.search(r'''file:\s*['\"]([^'\"]+\.m3u8[^'\"]*)['\"]''', data_html) or re.search(r'''file:\s*['\"]([^'\"]+)['\"]''', data_html)
                             if m3u8_match:
                                 m3u8_url = m3u8_match.group(1).replace(r"\/", "/")
                                 jw_key = ""
-                                key_match = re.search(r'jwplayer\.key\s*=\s*["']([^"']+)["']', data_html)
+                                key_match = re.search(r"""jwplayer\.key\s*=\s*["']([^"']+)["']""", data_html)
                                 if key_match:
                                     jw_key = key_match.group(1)
                                     m3u8_url = f"{m3u8_url}#jwkey={jw_key}"
